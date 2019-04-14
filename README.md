@@ -1,4 +1,4 @@
-**1、确保安装了[jdk1.7或者更高]**(https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+**1、确保安装了[jdk1.7或者更高](https://www.oracle.com/technetwork/java/javase/downloads/index.html)**
 
 **2、安装[Eclipse Oxygen](https://www.eclipse.org/)用于java开发**
 
