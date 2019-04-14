@@ -28,7 +28,7 @@
 
  ![win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_16-00-30.gif](http://win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_16-00-30.gif)
 
-**10、队长完成任务后提交 **
+**10、队长完成任务后提交**
 
 ![win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-39-39.gif](http://win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-39-39.gif) 
 
