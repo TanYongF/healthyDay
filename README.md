@@ -16,11 +16,11 @@
 
 ![win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-29-56.gif](http://win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-29-56.gif)
 
-**7、小队成员完成任务提交 **
+**7、小队成员完成任务提交**
 
 ![win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-56-45.gif](http://win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_15-56-45.gif)
 
-**8、小队成员请求Pull Request  **
+**8、小队成员请求Pull Request**
 
 ![win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_16-48-27.gif](http://win.pmease.cn/img/coursedesign/Honeycam_2019-04-14_16-48-27.gif)
 
