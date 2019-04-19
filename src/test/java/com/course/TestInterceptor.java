@@ -5,6 +5,8 @@ import com.course.pojo.PointObject;
 import com.course.utils.FileUtils;
 import com.course.utils.JsonUtils;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +25,29 @@ public class TestInterceptor {
 	TestDesign testDesign;
 	
     //检验当前积分情况
-    private void assertScore(){
+    private int assertScore(){
         try {
             String file = FileUtils.readFile("score");
             PointObject pointObject = JsonUtils.jsonToPojo(file,PointObject.class);
             System.out.println("成长积分："+pointObject.getGrowScore());
             System.out.println("可交换积分："+pointObject.getExchangeScore());
             System.out.println("总积分："+pointObject.getScoreTotal());
+            
+            return pointObject.getScoreTotal();
         }catch (Exception e){
             e.printStackTrace();
         }
+		return 0;        
     }
     
     @Test
     public void testDesign() {
     	try {
-    		assertScore();
+    		int score1=assertScore();
     		testDesign.testDesign();
-    		assertScore();
+    		int score2=assertScore();
+    		
+    		assertEquals(0, score2-score1);
     	}catch (Exception e) {
 			// TODO: handle exception
 		}

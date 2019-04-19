@@ -15,7 +15,7 @@ public class FileUtils {
                 f.createNewFile();
             }
             OutputStreamWriter write = new OutputStreamWriter(
-                    new FileOutputStream(f), "gbk");
+                    new FileOutputStream(f), "utf-8");
             BufferedWriter writer = new BufferedWriter(write);
             writer.write(fileContent);
             writer.close();
@@ -30,7 +30,7 @@ public class FileUtils {
             File f = new File(fileName);
             if (f.isFile() && f.exists()) {
                 InputStreamReader read = new InputStreamReader(
-                        new FileInputStream(f), "gbk");
+                        new FileInputStream(f), "utf-8");
                 BufferedReader reader = new BufferedReader(read);
                 String line;
                 while ((line = reader.readLine()) != null) {
