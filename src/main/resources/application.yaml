@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://81.68.239.206:3306/miaosha?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&autoReconnect=true&&enabledTLSProtocols=TLSv1.2
+    username: miaosha
+    password: 123456
+    druid:
+      filters: stat
+      max-active: 1000
+      initial-size: 5
+  redis:
+    url: 81.68.239.206
+    port: 6379
+    connect-timeout: 10
+    password: tanyongfeng13666
+    jedis:
+      pool:
+        max-idle: 500
+        max-wait: 2000
+    database: 2
