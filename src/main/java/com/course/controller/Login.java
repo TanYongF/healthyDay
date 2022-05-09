@@ -1,17 +1,20 @@
 package com.course.controller;
 
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author lixuy
- * Created on 2019-04-11
- */
-@Component
+@RestController
 //登录平台
 public class Login {
 
-    public void login(){
-        System.out.println("======被拦截的login方法执行======");
+    @GetMapping("/hello")
+    public String getLogin(){
+        return "hello";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
 }
