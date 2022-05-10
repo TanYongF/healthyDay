@@ -1,5 +1,6 @@
 package com.course.redis;
 
+import com.course.config.RedisConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import java.time.Duration;
 public class RedisFactory {
 
     Logger logger = LoggerFactory.getLogger(RedisFactory.class);
-
 
     @Autowired
     RedisConfig redisConfig;

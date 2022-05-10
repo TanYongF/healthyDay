@@ -1,7 +1,7 @@
 package com.course.validator;
 
 import com.alibaba.druid.util.StringUtils;
-import com.course.utils.ValidatorUtil;
+import com.course.util.ValidatorUtil;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +13,7 @@ import javax.validation.ConstraintValidatorContext;
  **/
 public class IsMobileValidator implements ConstraintValidator<IsMobile, String> {
 
-    private boolean required = false;
+    private boolean required = true;
 
     @Override
     public void initialize(IsMobile constraintAnnotation) {
