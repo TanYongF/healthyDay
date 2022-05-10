@@ -1,9 +1,8 @@
 package com.course;
 
-import com.course.controller.TestDesign;
 import com.course.pojo.PointObject;
-import com.course.utils.FileUtils;
-import com.course.utils.JsonUtils;
+import com.course.util.FileUtils;
+import com.course.util.JsonUtils;
 
 import static org.junit.Assert.assertEquals;
 
