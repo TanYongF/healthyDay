@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import static com.course.utils.JSONUtil.beanToString;
-import static com.course.utils.JSONUtil.stringToBean;
+import static com.course.util.JSONUtil.beanToString;
+import static com.course.util.JSONUtil.stringToBean;
 
 
 /**
