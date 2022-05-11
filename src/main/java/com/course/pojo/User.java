@@ -19,11 +19,17 @@ public class User implements Serializable {
 
     private Long id;
     private String nickname;
+    private byte gender;
     private String password;
     private String salt;
     private String head;
     private Date registerDate;
     private Date lastLoginDate;
     private Integer loginCount;
-
+    private String email;
+    private String info;
+    /**
+     * 并发症
+     */
+    private String complication;
 }
