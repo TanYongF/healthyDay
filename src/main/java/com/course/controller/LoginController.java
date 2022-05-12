@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -71,7 +72,7 @@ public class LoginController {
      */
     @PostMapping("/do_login")
     @ResponseBody
-    public Result<CodeMsg> doLogin(@Validated UserVo userVo, HttpServletResponse response) {
+    public Result<CodeMsg> doLogin(@Validated UserVo userVo, HttpServletResponse response, HttpServletRequest request) {
         logger.info("【用户登陆提醒】" + userVo.toString() + "尝试登陆....");
         userService.login(userVo, response);
         return Result.success(CodeMsg.SUCCESS);
