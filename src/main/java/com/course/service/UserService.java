@@ -127,7 +127,9 @@ public class UserService {
     }
 
     private void addCookie(HttpServletResponse response, User user, String token) {
-        if (user == null || StringUtils.isEmpty(token)) return;
+        if (user == null || StringUtils.isEmpty(token)) {
+            return;
+        }
         //生成Cookie
         redisService.set(UserKey.token, token, user);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);

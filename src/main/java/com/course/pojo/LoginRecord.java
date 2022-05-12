@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class LoginRecord {
+
     private static final long serialVersionUID = 123432456789L;
     private Long id;
     private Long userId;
