@@ -26,9 +26,32 @@
 		<script th:src="@{/js/common.js}" type="text/javascript"></script>
 	</head>
 	<body>
+	<!--加个title-->
+	<nav>
+		<div class="nav-wrapper teal lighten-2">
+			<a href="" class="brand-logo  center">血糖健康检测积分系统</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="">注册</a></li>
+				<li><a href="">找回密码</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--加个图-->
+	<div class="container login-container" style="flex: 1 0 auto; width: 90%">
+		<div class="row section  ">
+			<div class="col s12 l12">
+				<div class="card horizontal large" style="height: 600px; background-color: rgba(255,255,255,0.5)" >
+					<div class="card-image">
+						<img width="600" height="500" th:src="${imageProxy} + 'https://picsum.photos/seed/600/500?blur=5'"  class="responsive-img wp-post-image" loading="lazy"  sizes="(max-width: 305px) 100vw, 305px">
+						<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
+										<span style="font-size: 64px;line-height: 240px;">积分系统
+											<br>Integral
+										</span>
 
+							</span>
+					</div>
 		<form id="loginForm" method="post" name="loginForm" style="width:50%; margin:0 auto">
-			<h2 style="text-align:center; margin-bottom: 20px">用户登录</h2>
+			<h4 style="text-align:center; margin-bottom: 20px">用户登录</h4>
 			<div class="form-group">
 				<div class="row">
 					<label class="form-label col-md-4">请输入手机号码</label>
@@ -56,7 +79,13 @@
 					<button class="btn btn-primary btn-block" onclick="reset()" type="reset">重置</button>
 				</div>
 				<div class="col-md-5">
-					<button class="btn btn-primary btn-block" onclick="login()" type="submit">登录</button>
+					<!--更改布局-->
+					<div class="section row">
+						<div class="center-align">
+							<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
+							<button class="btn-large waves-effect waves-light pulse" onclick="login()" type="submit">登录</button>
+						</div>
+					</div>
 				</div>
 			</div>
 
