@@ -39,7 +39,9 @@ public class GlobalExceptionHandler {
         } else if (e instanceof GlobalException) {
             logger.error(e.getMessage());
             return Result.error(((GlobalException) e).getCodeMsg());
-        } else return Result.error(CodeMsg.SERVER_ERROR);
+        } else {
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
     }
 
 }
