@@ -16,4 +16,6 @@ public class HealthyController {
     public String index(){
         return "index";
     }
+
+
 }

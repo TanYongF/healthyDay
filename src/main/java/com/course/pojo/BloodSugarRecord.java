@@ -21,7 +21,7 @@ public class BloodSugarRecord {
 
     private static final long serialVersionUID = 123456789L;
     private long id;
-    private String userId;
+    private Long userId;
     private BigDecimal value;
     private LocalDateTime recordTime;
 }
