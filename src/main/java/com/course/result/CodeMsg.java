@@ -16,6 +16,8 @@ public class CodeMsg {
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500214, "手机号不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215, "密码错误");
 
+    public static CodeMsg UPDATE_BSR_SUCCESSFUL = new CodeMsg(500300, "添加血糖数据成功");
+
     private int code;
     private String msg;
 
