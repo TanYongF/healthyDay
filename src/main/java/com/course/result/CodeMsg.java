@@ -7,8 +7,12 @@ public class CodeMsg {
     public static CodeMsg REGISTER_SUCCESS = new CodeMsg(200001, "注册成功！");
     public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
     public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
+    /**
+     * 用户未登录或者用户Session中不存在相应的Token。
+     */
     //登录模块 5002XX
-    public static CodeMsg SESSION_ERROR = new CodeMsg(500210, "Session不存在或者已经失效");
+    public static CodeMsg SESSION_ERROR = new CodeMsg(500210, "登陆已过期，请重新登陆");
+
     public static CodeMsg PASSWORD_EMPTY = new CodeMsg(500211, "登录密码不能为空");
     public static CodeMsg MOBILE_EMPTY = new CodeMsg(500212, "手机号不能为空");
     public static CodeMsg MOBILE_ERROR = new CodeMsg(500213, "手机号格式错误");
@@ -16,8 +20,11 @@ public class CodeMsg {
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500214, "手机号不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215, "密码错误");
 
-    public static CodeMsg UPDATE_BSR_SUCCESSFUL = new CodeMsg(500300, "添加血糖数据成功");
+    public static CodeMsg NO_LOGIN = new CodeMsg(500216, "用户未登陆");
 
+    // 数据模块 5003XX
+    public static CodeMsg UPDATE_BSR_SUCCESSFUL = new CodeMsg(500300, "添加血糖数据成功");
+    public static CodeMsg UPDATE_IR_SUCCESSFUL = new CodeMsg(500300, "添加胰岛素数据成功");
     private int code;
     private String msg;
 

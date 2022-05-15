@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class InsulinRecord {
 
     private long id;
-    private String userId;
+    private long userId;
     private BigDecimal value;
     private LocalDateTime recordTime;
 }

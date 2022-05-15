@@ -54,5 +54,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userTaskInterceptor).addPathPatterns(uriList);
+        registry.addInterceptor(authInterceptor).addPathPatterns("/brs/**", "/inr/**");
     }
 }
