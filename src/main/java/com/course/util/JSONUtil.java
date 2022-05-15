@@ -27,6 +27,8 @@ public class JSONUtil {
             return (String) value;
         } else if (clazz == long.class || clazz == Long.class) {
             return "" + value;
+        } else if (clazz == byte.class || clazz == Byte.class) {
+            return value.toString();
         } else {
             return JSON.toJSONString(value);
         }
@@ -43,8 +45,10 @@ public class JSONUtil {
             return (T) str;
         } else if (clazz == long.class || clazz == Long.class) {
             return (T) Long.valueOf(str);
+        } else if (clazz == byte.class || clazz == Byte.class) {
+            return (T) Byte.valueOf(str);
         } else {
-            return JSON.toJavaObject(JSON.parseObject(str), clazz);
+            return cn.hutool.json.JSONUtil.toBean(str, clazz);
         }
     }
 }
