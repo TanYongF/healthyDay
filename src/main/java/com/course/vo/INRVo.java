@@ -1,6 +1,5 @@
 package com.course.vo;
 
-import cn.hutool.core.date.DateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +9,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @describe: 前端传入的表单对应实体
@@ -20,7 +18,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BSRVo {
+public class INRVo {
 
     private Long userId;
 
