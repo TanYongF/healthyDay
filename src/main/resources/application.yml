@@ -22,3 +22,6 @@ spring:
     poolMaxIdle: 500
     poolMaxWait: 2000
     database: 2
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
