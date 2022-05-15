@@ -29,7 +29,7 @@
 	<!--加个title-->
 	<nav>
 		<div class="nav-wrapper teal lighten-2">
-			<a href="" class="brand-logo  center">血糖健康检测积分系统</a>
+			<a href="" class="brand-logo  center">血糖健康监测积分系统</a>
 		</div>
 	</nav>
 	<!--加个图-->
@@ -39,19 +39,13 @@
 				<div class="card horizontal large" style="height: 600px; background-color: rgba(255,255,255,0.5)" >
 					<div class="card-image">
 						<img width="600" height="500" th:src="${imageProxy} + 'https://picsum.photos/seed/600/500?blur=5'"  class="responsive-img wp-post-image" loading="lazy"  sizes="(max-width: 305px) 100vw, 305px">
-						<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
-							<span style="font-size: 64px;line-height: 120px; background-color: rgb(0,0,0)">积分系统
-								<br>Integral
-							</span>
-
-						</span>
 					</div>
 		<form id="loginForm" method="post" name="loginForm" style="width:50%; margin:0 auto">
-			<h4 style="text-align:center; margin-bottom: 20px">注册账号</h4>
+			<h4 style="text-align:center; margin-bottom: 20px">注册</h4>
 			<div class="form-group">
 				<div class="row">
-					<label class="form-label col-md-4">请输入手机号码</label>
-					<div class="col-md-5">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">account_circle</i>
 						<input class="form-control" id="mobile" maxlength="11" minlength="11" name="mobile"
 						       placeholder="手机号码" required="true" type="text"/>
 					</div>
@@ -62,8 +56,8 @@
 
 			<div class="form-group">
 				<div class="row">
-					<label class="form-label col-md-4">请输入密码</label>
-					<div class="col-md-5">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">vpn_key</i>
 						<input class="form-control" id="password" maxlength="16" minlength="6" name="password"
 						       placeholder="密码" required="true" type="password"/>
 					</div>
