@@ -2,7 +2,7 @@ package com.course.service;
 
 import com.course.dao.BSRDao;
 import com.course.pojo.BloodSugarRecord;
-import com.course.vo.BSRVo;
+import com.course.vo.BSRVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class BSRService {
         return bsrDao.getById(id);
     }
 
-    public void updateBSValue(BSRVo bsrVo) {
+    public void updateBSValue(BSRVO bsrVo) {
         BloodSugarRecord bsr = new BloodSugarRecord();
         bsr.setValue(bsrVo.getValue());
         bsr.setRecordTime(bsrVo.getRecordTime());

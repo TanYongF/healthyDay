@@ -6,12 +6,11 @@ import com.course.pojo.User;
 import com.course.result.CodeMsg;
 import com.course.result.Result;
 import com.course.service.BSRService;
-import com.course.vo.BSRVo;
+import com.course.vo.BSRVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class BSRController {
 
     @ResponseBody
     @PostMapping("/update")
-    public Result<CodeMsg> updateBSR(User user, @RequestBody @Validated BSRVo bsrVo) {
+    public Result<CodeMsg> updateBSR(User user, @RequestBody @Validated BSRVO bsrVo) {
         bsrVo.setUserId(user.getId());
         bsrService.updateBSValue(bsrVo);
         return Result.success(CodeMsg.UPDATE_BSR_SUCCESSFUL);
