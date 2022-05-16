@@ -11,7 +11,7 @@ import com.course.redis.UserKey;
 import com.course.result.CodeMsg;
 import com.course.util.MD5Util;
 import com.course.util.UUIDUtil;
-import com.course.vo.UserVo;
+import com.course.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,7 +86,7 @@ public class UserService {
         return true;
     }
 
-    public boolean login(UserVo userVo, HttpServletResponse response) {
+    public boolean login(UserVO userVo, HttpServletResponse response) {
         if (userVo == null) {
             throw new GlobalException(CodeMsg.SERVER_ERROR);
         }

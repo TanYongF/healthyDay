@@ -1,11 +1,8 @@
 package com.course.service;
 
-import com.course.dao.BSRDao;
 import com.course.dao.INRDao;
-import com.course.pojo.BloodSugarRecord;
 import com.course.pojo.InsulinRecord;
-import com.course.vo.BSRVo;
-import com.course.vo.INRVo;
+import com.course.vo.INRVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +24,7 @@ public class INRService {
         return inrDao.getById(id);
     }
 
-    public void updateINValue(INRVo inrVo) {
+    public void updateINValue(INRVO inrVo) {
         InsulinRecord inr = new InsulinRecord();
         inr.setValue(inrVo.getValue());
         inr.setRecordTime(inrVo.getRecordTime());

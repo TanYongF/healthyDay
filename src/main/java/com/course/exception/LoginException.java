@@ -2,7 +2,7 @@ package com.course.exception;
 
 
 import com.course.result.CodeMsg;
-import com.course.vo.UserVo;
+import com.course.vo.UserVO;
 import lombok.Data;
 
 /**
@@ -15,9 +15,9 @@ public class LoginException extends GlobalException {
 
     private static final long serialVersionUID = 21L;
 
-    private UserVo userVo;
+    private UserVO userVo;
 
-    public LoginException(CodeMsg codeMsg, UserVo userVo) {
+    public LoginException(CodeMsg codeMsg, UserVO userVo) {
         super(codeMsg);
         this.userVo = userVo;
     }

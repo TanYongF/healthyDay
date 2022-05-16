@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
  **/
 @Data
 @ToString
-public class UserVo {
+public class UserVO {
 
     @NotEmpty
     @IsMobile
