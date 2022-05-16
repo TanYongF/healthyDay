@@ -8,6 +8,7 @@
 - 本项目成员包括 ： 张雨桐、王雪臣、[谭永锋](https://tans.fun)
 - **项目地址** ： [积分系统项目地址](http://win.pmease.cn/projects/coursedesign-B19040229)
 - 接口文档：[积分系统接口文档](https://www.apifox.cn/apidoc/shared-33be4a68-d17c-41b1-b26a-80c3ff7c6a45/api-20111667)
+
 ## 一、需求分析
 
 需要明确对于哪些积分项目是我们需要实现，并且可以考虑其他的扩展积分项目。
@@ -163,7 +164,7 @@
 
 1. [策略模式](https://blog.csdn.net/u010185805/article/details/116998482)
 1. [前端构建图例](https://www.processon.com/view/link/6279170d1efad40df02ee683)
-1. [Echarts学习](![img](file:///C:\Users\tan13\AppData\Roaming\Tencent\QQTempSys\[5UQ[BL(6~BS2JV6W}N6[%S.png)https://echarts.apache.org/zh/index.html)
+1. [Echarts学习](https://echarts.apache.org/zh/index.html)
 1. [Materializecss学习](http://archives.materializecss.com/0.100.2/grid.html)
 1. [Jqery学习](https://www.runoob.com/jquery/jquery-tutorial.html)
 1. [投票项目（参考）](https://github.com/TanYongF/SimpleVotingSystem)
