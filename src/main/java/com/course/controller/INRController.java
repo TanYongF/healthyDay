@@ -7,7 +7,7 @@ import com.course.result.CodeMsg;
 import com.course.result.Result;
 import com.course.service.INRService;
 import com.course.validator.NeedAuth;
-import com.course.vo.INRVo;
+import com.course.vo.INRVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -40,7 +40,7 @@ public class INRController {
     @ResponseBody
     @NeedAuth
     @PostMapping("/update")
-    public Result<CodeMsg> updateBSR(User user, @RequestBody @Validated INRVo inrVo) {
+    public Result<CodeMsg> updateBSR(User user, @RequestBody @Validated INRVO inrVo) {
         inrVo.setUserId(user.getId());
         inrService.updateINValue(inrVo);
         return Result.success(CodeMsg.UPDATE_IR_SUCCESSFUL);

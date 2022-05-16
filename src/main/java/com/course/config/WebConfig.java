@@ -5,7 +5,6 @@ import com.course.interceptor.UserTaskInterceptor;
 import com.course.interceptor.strategy.IUserTaskStrategy;
 import com.course.interceptor.strategy.UserTaskStrategyType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -54,6 +53,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userTaskInterceptor).addPathPatterns(uriList);
-        registry.addInterceptor(authInterceptor).addPathPatterns("/brs/**", "/inr/**");
+        registry.addInterceptor(authInterceptor).addPathPatterns("/brs/**", "/inr/**", "/info/**");
     }
 }
