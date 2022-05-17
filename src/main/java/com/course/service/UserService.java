@@ -1,10 +1,11 @@
 package com.course.service;
 
-import cn.hutool.core.date.DateTime;
 import com.alibaba.druid.util.StringUtils;
+import com.course.dao.CreditTransactionDao;
 import com.course.dao.UserDao;
 import com.course.exception.GlobalException;
 import com.course.exception.LoginException;
+import com.course.pojo.Event;
 import com.course.pojo.User;
 import com.course.redis.RedisService;
 import com.course.redis.UserKey;
@@ -14,9 +15,11 @@ import com.course.util.UUIDUtil;
 import com.course.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 
 /**
  * @Describe: 类描述
@@ -31,6 +34,10 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    CreditTransactionService creditTransactionService;
+
     @Autowired
     private RedisService redisService;
 
@@ -75,7 +82,7 @@ public class UserService {
         User toBeUpdate = new User();
         toBeUpdate.setId(id);
         toBeUpdate.setPassword(MD5Util.formPassToDbPass(formPassword, user.getSalt()));
-        userDao.update(toBeUpdate);
+        userDao.updatePassword(toBeUpdate);
 
         //remove the data in redis
         redisService.remove(UserKey.getById, id + "");
@@ -86,23 +93,39 @@ public class UserService {
         return true;
     }
 
+    public boolean updateInfo(long id, User toBeUpdate){
+        return false;
+
+    }
+
+    @Transactional
     public boolean login(UserVO userVo, HttpServletResponse response) {
         if (userVo == null) {
             throw new GlobalException(CodeMsg.SERVER_ERROR);
         }
-        //检验用户
+        //校验用户
         String mobile = userVo.getMobile();
         User user = getById(Long.parseLong(mobile));
 
+        //不存在此用户
         if (user == null) {
             throw new LoginException(CodeMsg.MOBILE_NOT_EXIST, userVo);
         }
 
+        //判别密码
         String formPass = userVo.getPassword();
         String dbPass = MD5Util.formPassToDbPass(formPass, user.getSalt());
         if (!dbPass.equals(user.getPassword())) {
             throw new LoginException(CodeMsg.PASSWORD_ERROR, userVo);
         }
+
+        //更新最后登陆日期，插入积分记录
+        if(user.getLastLoginDate() == null || !user.getLastLoginDate().isEqual(LocalDate.now())){
+            user.setLastLoginDate(LocalDate.now());
+            creditTransactionService.insert(user, Event.DAILY_LOGIN_RECORD);
+            userDao.updateLastLoginDate(user);
+        }
+
         String token = UUIDUtil.uuid();
         addCookie(response, user, token);
         return true;
@@ -119,7 +142,7 @@ public class UserService {
             user = new User();
             user.setPassword(dbPass);
             user.setId(Long.valueOf(name));
-            user.setRegisterDate(DateTime.now());
+            user.setRegisterDate(LocalDate.now());
             user.setSalt(uuid);
             userDao.insert(user);
         }
@@ -150,11 +173,13 @@ public class UserService {
             return null;
         }
         User user = redisService.get(UserKey.token, token, User.class);
-
         //更新token有效期
         addCookie(response, user, token);
         return user;
     }
 
 
+    public void updateLastLoginDate(User user) {
+        userDao.updateLastLoginDate(user);
+    }
 }

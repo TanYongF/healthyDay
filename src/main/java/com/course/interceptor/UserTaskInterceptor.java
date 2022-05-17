@@ -1,7 +1,9 @@
 package com.course.interceptor;
 
 import com.alibaba.druid.util.StringUtils;
+import com.course.config.RedisConfig;
 import com.course.interceptor.strategy.IUserTaskStrategy;
+import com.course.interceptor.strategy.LoginUserTaskStrategy;
 import com.course.interceptor.strategy.UserTaskStrategyType;
 import com.course.pojo.User;
 import com.course.service.UserService;
@@ -20,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @Describe: 用户任务拦截器
+ * @Describe: 用户任务拦截器，主要通过userTaskStrategyMap来维护不同的积分策略
  * @Author: tyf
  * @CreateTime: 2022/5/12
  **/
@@ -32,7 +34,14 @@ public class UserTaskInterceptor implements HandlerInterceptor{
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoginUserTaskStrategy loginUserTaskStrategy;
 
+
+    /**
+     * 生成对应 Map
+     * @param iUserTaskStrategies
+     */
     @Autowired
     public void setUserTaskStrategyMap(List<IUserTaskStrategy> iUserTaskStrategies){
         iUserTaskStrategies.forEach(iUserTaskStrategy -> {
@@ -42,16 +51,17 @@ public class UserTaskInterceptor implements HandlerInterceptor{
         });
     }
 
-
-
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String uri = request.getRequestURI();
+        String token = RequestUtil.getTokenByRequest(request);
+        User user = userService.getByToken(response, token);
+        //每日登陆过滤器
+        loginUserTaskStrategy.finishedUserIntegralTask(user, token);
         IUserTaskStrategy userStrategy = userTaskStrategyMap.get(uri);
+        //其他接口过滤器
         if (userStrategy != null) {
-            String token = RequestUtil.getTokenByRequest(request);
-            User user = userService.getByToken(response, token);
-            userStrategy.finishedUserIntegralTask(user);
+            userStrategy.finishedUserIntegralTask(user, token);
         }
     }
 
