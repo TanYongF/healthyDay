@@ -18,11 +18,22 @@ public interface UserDao {
     @Select("select * from user user where id = #{id}")
     User getById(long id);
 
+    /**
+     * 更新密码接口
+     * @param toBeUpdate
+     */
     @Update("update user set password = #{password} where id = #{id}")
-    void update(User toBeUpdate);
+    void updatePassword(User toBeUpdate);
 
     @Insert("insert into user (id, salt, password, register_date, login_count) values " +
             "(#{id}, #{salt}, #{password}, #{registerDate}, #{loginCount})")
     void insert(User user);
+
+    /**
+     * 更新用户最后登陆日期
+     * @param toBeUpdate 用户实体
+     */
+    @Update("update user set last_login_date = #{lastLoginDate} where id = #{id}")
+    void updateLastLoginDate(User toBeUpdate);
 
 }

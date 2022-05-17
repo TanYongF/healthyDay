@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @describe: 类描述
+ * @describe: 用户信息接口
  * @author: tyf
  * @createTime: 2022/5/16 14:30
  **/
 @Controller
-@RequestMapping("/info")
+@RequestMapping("/u")
 public class UserInfoController {
 
     @Autowired
@@ -25,9 +25,11 @@ public class UserInfoController {
 
     @ResponseBody
     @NeedAuth
-    @GetMapping("/details")
+    @GetMapping("/info")
     public Result<UserDTO> getUserInfo(User user) {
         UserDTO userDetail = userInfoService.getUserDetails(user.getId());
         return Result.success(userDetail);
     }
+
+
 }

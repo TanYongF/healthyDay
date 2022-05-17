@@ -1,5 +1,10 @@
 package com.course.result;
 
+/**
+ * @author tyf
+ * @description 通用信息码
+ * @date 8:33 2022/5/17
+ **/
 public class CodeMsg {
 
     //通用的错误码

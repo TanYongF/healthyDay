@@ -10,7 +10,8 @@ import com.course.pojo.User;
 public interface IUserTaskStrategy {
 
     /**
-     * @param user 用户对象
+     * @param user  用户对象
+     * @param token
      */
-    void finishedUserIntegralTask(User user);
+    void finishedUserIntegralTask(User user, String token);
 }
