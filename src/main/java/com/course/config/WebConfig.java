@@ -26,7 +26,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private UserArgumentResolver userArgumentResolver;
-
     @Autowired
     private AuthInterceptor authInterceptor;
     private List<String> uriList = new ArrayList<>();
@@ -36,7 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-
         //注入自定义的解析器
         argumentResolvers.add(userArgumentResolver);
     }
@@ -52,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(userTaskInterceptor).addPathPatterns(uriList);
+        registry.addInterceptor(userTaskInterceptor).addPathPatterns(uriList).excludePathPatterns("/login/**");
         registry.addInterceptor(authInterceptor).addPathPatterns("/brs/**", "/inr/**", "/info/**");
     }
 }

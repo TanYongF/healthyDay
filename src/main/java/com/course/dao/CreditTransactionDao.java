@@ -1,8 +1,10 @@
 package com.course.dao;
 
 import com.course.pojo.CreditTransaction;
+import com.course.pojo.Event;
 import com.course.vo.UserDTO;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,10 +21,10 @@ public interface CreditTransactionDao {
     @Select("select * from credit_transaction where credit_transaction_id=#{id}")
     public CreditTransaction getById(Integer id);
 
-    @Options(useGeneratedKeys = true, keyProperty = "creditTransactionId")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into credit_transaction" +
             " (id,user_id,event_id,create_time,expired_time)" +
-            " values(id,userId,eventId,createTime,expiredTime)")
+            " values(#{id},#{userId},#{eventId},#{createTime},#{expiredTime})")
     public Integer insert(CreditTransaction creditTransaction);
 
     @Delete(value = "delete from credit_transaction where credit_transaction_id=#{creditTransactionId}")
@@ -86,4 +88,24 @@ public interface CreditTransactionDao {
     )
     List<CreditTransaction> selectList(CreditTransaction creditTransaction);
 
+    /**
+     * 判断该积记录是否满足条件
+     * @param creditRecord 待验证积分记录
+     */
+    @Select("select\n" +
+            " \t(\n" +
+            "\t \tif(mfpd > 0 and mfpd < count_per_day, false, true)\n" +
+            "\t \tand if(mfpm > 0 and mfpm < count_per_month, false, true)\n" +
+            "\t \tand if(mfpy > 0 and mfpy < count_per_year, false, true)\n" +
+            " \t) as ret\n" +
+            "from(\n" +
+            "\tselect \n" +
+            "\t\tifnull(sum(case to_days(ct.create_time) when to_days(now()) then 1 else 0 end) ,0) as `count_per_day`,\n" +
+            "\t\tifnull(sum(case date_format(ct.create_time, '%Y%m') when date_format(curdate() , '%Y%m') then 1 else 0 end) ,0) as `count_per_month`,\n" +
+            "\t\tifnull(sum(case year(ct.create_time) when year(now()) then 1 else 0 end) ,0) as `count_per_year`,\n" +
+            "\t\tev.max_frequency_per_day as mfpd , ev.max_frequency_per_month mfpm, ev.max_frequency_per_year mfpy \n" +
+            "\tfrom credit_transaction ct left join event ev on ct.event_id  = ev.id\n" +
+            "\twhere ct.event_id = #{eventId}\n" +
+            ")as res;\n")
+    boolean isValid(CreditTransaction creditRecord);
 }

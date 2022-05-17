@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -23,8 +25,8 @@ public class User implements Serializable {
     private String password;
     private String salt;
     private String head;
-    private Date registerDate;
-    private Date lastLoginDate;
+    private LocalDate registerDate;
+    private LocalDate lastLoginDate;
     private Integer loginCount;
     private String email;
     private String info;

@@ -20,7 +20,7 @@ public class UpdateBSUserTaskStrategy implements IUserTaskStrategy {
 
 
     @Override
-    public void finishedUserIntegralTask(User user) {
+    public void finishedUserIntegralTask(User user, String token) {
 
 
     }

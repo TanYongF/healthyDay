@@ -30,7 +30,7 @@ public class JSONUtil {
         } else if (clazz == byte.class || clazz == Byte.class) {
             return value.toString();
         } else {
-            return JSON.toJSONString(value);
+            return cn.hutool.json.JSONUtil.toJsonStr(value);
         }
     }
 
