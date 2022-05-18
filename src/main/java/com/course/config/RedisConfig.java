@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Describe: 类描述
+ * @Describe: Redis配置类
  * @Author: tyf
  * @CreateTime: 2022/4/15
  **/

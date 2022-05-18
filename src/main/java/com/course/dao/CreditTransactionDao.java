@@ -1,10 +1,8 @@
 package com.course.dao;
 
 import com.course.pojo.CreditTransaction;
-import com.course.pojo.Event;
 import com.course.vo.UserDTO;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -94,9 +92,9 @@ public interface CreditTransactionDao {
      */
     @Select("select\n" +
             " \t(\n" +
-            "\t \tif(mfpd > 0 and mfpd < count_per_day, false, true)\n" +
-            "\t \tand if(mfpm > 0 and mfpm < count_per_month, false, true)\n" +
-            "\t \tand if(mfpy > 0 and mfpy < count_per_year, false, true)\n" +
+            "\t \tif(mfpd > 0 and mfpd <= count_per_day, false, true)\n" +
+            "\t \tand if(mfpm > 0 and mfpm <= count_per_month, false, true)\n" +
+            "\t \tand if(mfpy > 0 and mfpy <= count_per_year, false, true)\n" +
             " \t) as ret\n" +
             "from(\n" +
             "\tselect \n" +

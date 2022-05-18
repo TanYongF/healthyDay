@@ -10,6 +10,8 @@ import com.course.pojo.User;
 public interface IUserTaskStrategy {
 
     /**
+     * 主要声明具体增加积分逻辑
+     *
      * @param user  用户对象
      * @param token
      */
