@@ -1,7 +1,6 @@
 package com.course.service;
 
 import com.alibaba.druid.util.StringUtils;
-import com.course.dao.CreditTransactionDao;
 import com.course.dao.UserDao;
 import com.course.exception.GlobalException;
 import com.course.exception.LoginException;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 /**
- * @Describe: 类描述
+ * @Describe: 用户信息
  * @Author: tyf
  * @CreateTime: 2022/4/16
  **/
@@ -93,9 +92,11 @@ public class UserService {
         return true;
     }
 
-    public boolean updateInfo(long id, User toBeUpdate){
-        return false;
-
+    public boolean updateInfo(User toBeUpdate) {
+        userDao.updateInfo(toBeUpdate);
+        //删除缓存
+        redisService.remove(UserKey.getById, Long.toString(toBeUpdate.getId()));
+        return true;
     }
 
     @Transactional

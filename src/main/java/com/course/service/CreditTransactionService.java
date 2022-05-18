@@ -32,7 +32,7 @@ public class CreditTransactionService {
         LocalDateTime curTime = LocalDateTime.now();
         creditRecord.setCreateTime(curTime);
         creditRecord.setEventId(event.getId());
-        creditRecord.setExpiredTime(curTime.plusDays(Event.DAILY_LOGIN_RECORD.getEffectiveDay()));
+        creditRecord.setExpiredTime(curTime.plusDays(event.getEffectiveDay()));
         //获取是否可插入
         boolean isValid = creditTransactionDao.isValid(creditRecord);
         if(isValid){

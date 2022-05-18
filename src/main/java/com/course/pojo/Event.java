@@ -1,6 +1,9 @@
 package com.course.pojo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashMap;
 
@@ -15,14 +18,14 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class Event {
 
-    public static final Event DAILY_LOGIN_RECORD = new Event(201L,"用户每日登陆", (byte) 0,1,0,1,0,0);
-    public static final Event UPDATE_BSR_RECORD = new Event(202L,"填报血糖含量", (byte) 0,1,0,0,2,0);
-    public static final Event UPDATE_INR_RECORD = new Event(203L,"填报胰岛素含量", (byte) 0,2,0,0,3,0);
-    public static final Event UPDATE_USER_DETAIL = new Event(204L,"完善用户信息", (byte) 0,3,0,0,0,1);
-    public static final Event JOIN_SCIENCE_JOB = new Event(301L,"参加科研活动", (byte) 1,3,0,0,0,0);
-    public static final Event JOIN_SUI_FANG = new Event(302L,"完成门诊随访", (byte) 1,5,0,0,0,0);
-    public static final Event JOIN_OTHER_ACTIVITY = new Event(303L,"参加拓展活动", (byte) 1,8,0,
-            0,0,0);
+    public static final Event DAILY_LOGIN_RECORD = new Event(201L, "用户每日登陆", 0);
+    public static final Event UPDATE_BSR_RECORD = new Event(202L, "填报血糖含量", 0);
+    public static final Event UPDATE_INR_RECORD = new Event(203L, "填报胰岛素含量", 0);
+    public static final Event UPDATE_USER_DETAIL = new Event(204L, "完善用户信息", 0);
+    public static final Event UPDATE_USER_COMPLICATION = new Event(205L, "完善用户并发症信息", 0);
+    public static final Event JOIN_SCIENCE_JOB = new Event(301L, "参加科研活动", 60);
+    public static final Event JOIN_SUI_FANG = new Event(302L, "完成门诊随访", 60);
+    public static final Event JOIN_OTHER_ACTIVITY = new Event(303L, "参加拓展活动", 60);
     public static HashMap<Long, Event> eventMap = new HashMap();
 
     static {
@@ -30,10 +33,12 @@ public class Event {
         eventMap.put(202L, UPDATE_BSR_RECORD);
         eventMap.put(203L, UPDATE_INR_RECORD);
         eventMap.put(204L, UPDATE_USER_DETAIL);
-        eventMap.put(301L, JOIN_SCIENCE_JOB );
+        eventMap.put(205L, UPDATE_USER_COMPLICATION);
+        eventMap.put(301L, JOIN_SCIENCE_JOB);
         eventMap.put(302L, JOIN_SUI_FANG);
         eventMap.put(303L, JOIN_OTHER_ACTIVITY);
     }
+
 
     private long id;
     /**
@@ -68,6 +73,12 @@ public class Event {
      * 每年最大次数
      */
     private int maxFrequencyPerYear;
+
+    public Event(long id, String info, long effectiveDay) {
+        this.info = info;
+        this.id = id;
+        this.effectiveDay = effectiveDay;
+    }
 
     @Override
     public String toString() {

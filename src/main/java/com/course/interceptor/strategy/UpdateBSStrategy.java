@@ -1,6 +1,7 @@
 package com.course.interceptor.strategy;
 
-import com.course.pojo.User;
+import com.course.pojo.Event;
+import com.course.service.CreditTransactionService;
 import com.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,16 +13,17 @@ import org.springframework.stereotype.Component;
  * @createTime: 2022/5/12 10:28
  **/
 @Component
-@UserTaskStrategyType(uri = {"/login/do_login"})
-public class UpdateBSUserTaskStrategy implements IUserTaskStrategy {
+@UserTaskStrategyType(uri = {"/bsr/update"})
+public class UpdateBSStrategy extends UserTaskStrategy {
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    CreditTransactionService creditTransactionService;
 
-    @Override
-    public void finishedUserIntegralTask(User user, String token) {
-
-
+    public UpdateBSStrategy() {
+        super(Event.UPDATE_BSR_RECORD);
     }
+
 }

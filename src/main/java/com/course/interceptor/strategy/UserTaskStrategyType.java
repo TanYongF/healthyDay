@@ -1,7 +1,6 @@
 package com.course.interceptor.strategy;
 
 
-import javax.annotation.security.RunAs;
 import java.lang.annotation.*;
 
 
@@ -14,5 +13,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface UserTaskStrategyType {
+    /**
+     * 需要拦截的 URL
+     *
+     * @return uri数组
+     */
     String[] uri();
 }

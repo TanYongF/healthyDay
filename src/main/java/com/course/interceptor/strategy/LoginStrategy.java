@@ -1,6 +1,5 @@
 package com.course.interceptor.strategy;
 
-import com.course.pojo.CreditTransaction;
 import com.course.pojo.Event;
 import com.course.pojo.User;
 import com.course.redis.RedisService;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author tyf
@@ -21,7 +19,7 @@ import java.time.LocalDateTime;
 
 @UserTaskStrategyType(uri = {"/index"})
 @Component
-public class LoginUserTaskStrategy implements IUserTaskStrategy{
+public class LoginStrategy implements IUserTaskStrategy {
 
     @Autowired
     UserService userService;
