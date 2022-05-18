@@ -31,9 +31,19 @@ public interface UserDao {
 
     /**
      * 更新用户最后登陆日期
+     *
      * @param toBeUpdate 用户实体
      */
     @Update("update user set last_login_date = #{lastLoginDate} where id = #{id}")
     void updateLastLoginDate(User toBeUpdate);
+
+    /**
+     * 更新用户基本信息
+     *
+     * @param toBeUpdate 待更新信息
+     */
+    @Update("update user set head = #{head}, info = #{info}, email = #{email}, nickname = #{nickname}," +
+            "gender= #{gender}, complication = #{complication}  where id =#{id}")
+    void updateInfo(User toBeUpdate);
 
 }

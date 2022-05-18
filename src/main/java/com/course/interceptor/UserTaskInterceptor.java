@@ -1,9 +1,7 @@
 package com.course.interceptor;
 
-import com.alibaba.druid.util.StringUtils;
-import com.course.config.RedisConfig;
 import com.course.interceptor.strategy.IUserTaskStrategy;
-import com.course.interceptor.strategy.LoginUserTaskStrategy;
+import com.course.interceptor.strategy.LoginStrategy;
 import com.course.interceptor.strategy.UserTaskStrategyType;
 import com.course.pojo.User;
 import com.course.service.UserService;
@@ -11,13 +9,11 @@ import com.course.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,7 +31,7 @@ public class UserTaskInterceptor implements HandlerInterceptor{
     UserService userService;
 
     @Autowired
-    LoginUserTaskStrategy loginUserTaskStrategy;
+    LoginStrategy loginUserTaskStrategy;
 
 
     /**
