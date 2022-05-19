@@ -10,6 +10,7 @@ import com.course.redis.RedisService;
 import com.course.redis.UserKey;
 import com.course.result.CodeMsg;
 import com.course.util.MD5Util;
+import com.course.util.RequestUtil;
 import com.course.util.UUIDUtil;
 import com.course.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
@@ -182,5 +184,11 @@ public class UserService {
 
     public void updateLastLoginDate(User user) {
         userDao.updateLastLoginDate(user);
+    }
+
+    public void logout(HttpServletRequest request, User user) {
+        String token = RequestUtil.getTokenByRequest(request);
+        redisService.remove(UserKey.token, token);
+        redisService.remove(UserKey.getById, Long.toString(user.getId()));
     }
 }

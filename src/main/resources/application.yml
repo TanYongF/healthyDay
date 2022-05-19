@@ -4,6 +4,9 @@ server:
 spring:
   thymeleaf:
     prefix: classpath:/template/
+    cache: false
+
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://81.68.239.206:3306/pointssystem?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&autoReconnect=true&&enabledTLSProtocols=TLSv1.2
