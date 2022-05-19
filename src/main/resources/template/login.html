@@ -1,96 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>主页</title>
-	<!-- CSS  -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/me.css" type="text/css">
-	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
-</head>
-<body class="bg">
-<nav>
-	<div class="nav-wrapper teal lighten-2">
-		<a href="" class="brand-logo  center">血糖健康检测积分系统</a>
-		<ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li><a href="">注册</a></li>
-			<li><a href="">找回密码</a></li>
-		</ul>
-	</div>
-</nav>
-<div th:replace="common :: navbar(2)"></div>
-
-<!--主体开始-->
-<div class="container login-container" style="flex: 1 0 auto; width: 90%">
-	<!--开始-->
-	<div class="row section  ">
-		<div class="col s12 l12">
-			<div class="card horizontal large" style="height: 600px; background-color: rgba(255,255,255,0.5)" >
-				<div class="card-image">
-					<img width="600" height="500" th:src="${imageProxy} + 'https://picsum.photos/seed/600/500?blur=5'"  class="responsive-img wp-post-image" loading="lazy"  sizes="(max-width: 305px) 100vw, 305px">
-					<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
-								<span style="font-size: 64px;line-height: 240px;">积分系统
-									<br>Integral
-								</span>
-
-							</span>
-				</div>
-				<div class="card-stacked">
-					<div class="card-content center">
-						<div class="section">
-							<div class="col s12 l12">
-								<div class="row section">
-									<h3 class="title left-align " style="font-weight: 900"><span class="red-text"></span>登录</h3>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>主页</title>
+		<!-- CSS  -->
+		<div th:replace="common::head"></div>
+	</head>
+	<body>
+		<div th:replace="common :: navbar(1)"></div>
+		<div class="container login-container" style="flex: 1 0 auto; width: 90%">
+			<!--开始-->
+			<div class="row section ">
+				<div class="col s12 l12">
+					<div class="card horizontal large" style="   height: 734px; background-color: rgba(255,255,255,0.5)" >
+						<div class="card-image">
+							<img width="600" height="600" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/seed/600/500?blur=5" class="responsive-img wp-post-image" loading="lazy"  sizes="(max-width: 305px) 100vw, 305px">
+							<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
+                                <span class="font-sans" style="font-size: 64px;line-height: 220px;">健康积分系统
+                                    <br>Points System
+                                </span>
+                            </span>
+						</div>
+						<div class="card-stacked">
+							<div class="card-content center">
+								<div class="section">
+									<div class="col s12 l12">
+										<div class="row section">
+											<h3 class="title left-align " style="font-weight: 900"><span class="red-text">·&nbsp;</span>手机号登录</h3>
+										</div>
+										<form method="post" id="login-form" class="horizontal section">
+											<div class="row">
+												<div class="input-field col s12 inline">
+													<i class="material-icons prefix">local_phone</i>
+													<input class="form-control" id="mobile" maxlength="11" minlength="11"
+													       name="mobile"
+													        required="true" type="text"/>
+													<label for="mobile">手机号码</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix">vpn_key</i>
+													<input id="password" type="password"   name="password" value="">
+													<label for="password">验证码</label>
+												</div>
+											</div>
+											<div class="section row">
+												<div class="center">
+													<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
+													<button class="btn-large waves-effect green pulse" type="button" name="login"  id="login" onclick="doLogin()">登录
+													</button>
+												</div>
+											</div>
+											<div class="row">
+												<div class="center">
+													<a href="/login/do_register">没有账号？去注册</a>
+												</div>
+											</div>
+										</form>
+									</div>
 								</div>
-								<form method="post" action="/login" th:id="login-form" class="horizontal section">
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">account_circle</i>
-											<input id="username" type="text"  class="validate" name="username" value="">
-											<label for="username">账号</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">vpn_key</i>
-											<input id="password" type="password"  class="validate" name="password" value="">
-											<label for="password">密码</label>
-										</div>
-									</div>
-									<div class="section row">
-										<div class="center-align">
-											<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
-											<button class="btn-large waves-effect waves-light pulse" type="submit" name="action">登录
-											</button>
-										</div>
-									</div>
-								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!--结束-->
 		</div>
-	</div>
-	<!--结束-->
+		<footer th:replace="common::footer"></footer>
+	</body>
+	<script>
+        function login() {
+            alert("fafaf")
+            $("#login-form").validate({
+                submitHandler: function (form) {
+                    doLogin();
+                }
+            });
+        }
 
+        function doLogin() {
+            g_showLoading();
+            var inputPass = $("#password").val();
+            var salt = g_passsword_salt;
+            var str = "" + salt.charAt(0) + salt.charAt(2) + inputPass + salt.charAt(5) + salt.charAt(4);
+            var password = md5(str);
 
-</div>
-<!--主体结束-->
-
-<div th:replace="common::footer"></div>
-
-<script th:inline="javascript">
-			let message =[[${param?.error}]]
-			if(message != null){
-                M.toast({
-                    html: "用户名或密码错误，请重新输入！",
-                    classes: 'rounded red',
-                });
-			}
-		</script>
-
-</body>
+            $.ajax({
+                url: "/login/do_login",
+                type: "POST",
+                data: {
+                    mobile: $("#mobile").val(),
+                    password: password
+                },
+                success: function (data) {
+                    layer.closeAll();
+                    if (data.code == 200) {
+                        layer.msg("成功", {icon: 1});
+                        window.location.href = "/index";
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+	</script>
 </html>

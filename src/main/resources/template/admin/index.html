@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<title>个人资料</title>
+		<div th:replace="common::head"></div>
+	</head>
+	<body>
+		<!--登陆后到这里-->
+		<div th:replace="common::root_navbar(0)"></div>
+		<div class="row">
+			<div class="col s4">
+				<div class="card horizontal large hoverable cyan lighten-5 hoverable"
+				     style="height: 900px; background-color: rgba(255,255,255,0.5)">
+					<p id="nickname"></p>
+					<p id=gender""></p>
+					<p id="email"></p>
+					<p id="info"></p>
+					<p id="head"></p>
+<!--					<p id="gender"></p>-->
+				</div>
+			</div>
+			<div class="col s8">
+				<div class="card hoverable">
+					<div class="card-image">
+						<img height="229" src="aa.png" width="305">
+						<span class="card-title">并发症记录</span>
+					</div>
+					<div class="card-content">
+						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
+					</div>
+					<div class="card-action">
+						<a href="#">这是一个链接</a>
+					</div>
+				</div>
+				<div class="card hoverable">
+					<div class="card-image">
+						<img height="229" src="aa.png" width="305">
+						<span class="card-title">健康监测</span>
+					</div>
+					<div class="card-content">
+						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
+					</div>
+					<div class="card-action">
+						<a href="#">这是一个链接</a>
+					</div>
+				</div>
+				<div class="card hoverable">
+					<div class="card-image">
+						<img height="229" src="aa.png" width="305">
+						<span class="card-title">活动</span>
+					</div>
+					<div class="card-content">
+						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
+					</div>
+					<div class="card-action">
+						<a href="#">这是一个链接</a>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div th:replace="common::footer"></div>
+	</body>
+	<script>
+
+        $(function () {
+            g_showLoading("加载个人信息中...");
+            $.ajax({
+                url: "/u/info",
+                type: "GET",
+                success: function (data) {
+                    layer.closeAll();
+                    console.log(data)
+                    if (data.code == 0) {
+                        let user = data.data
+                        $("#nickname").text(user.details.nickname);
+                        $("#gender").text(user.details.gender);
+                        $("#head").text(user.details.head);
+                        $("#info").text(user.details.info);
+                        $("#email").text(user.details.email);
+                        layer.msg("加载个人信息成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        })
+
+
+	</script>
+</html>

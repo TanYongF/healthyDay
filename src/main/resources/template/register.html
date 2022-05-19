@@ -1,70 +1,62 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>主页</title>
-	<!-- CSS  -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/me.css" type="text/css">
-	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
-
-
-</head>
-<!--TODO:完成注册页面（仿照登陆页面）-->
-<body class="bg">
-<div th:replace="common :: navbar(2)"></div>
-<!--注册-->
-<!--主体开始-->
-<div class="container login-container" style="flex: 1 0 auto; width: 90%">
-	<div class="row section  ">
-		<div class="col s12 l12">
-			<div class="card horizontal large cyan lighten-5" style="height: 700px; background-color: rgba(255,255,255,0.5)" >
-						<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
-						</span>
-				<div class="card-stacked">
-					<div class="card-content center">
-						<div class="section">
-							<div class="col s12 l12">
-								<div class="row section">
-									<h3 class="title left-align  center" style="font-weight: 900">注册</h3>
-								</div>
-								<form id="registerForm" method="post" name="loginForm" style="width:50%; margin:0 auto">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<div th:replace="common::head"></div>
+	</head>
+	<body class="bg">
+		<!--nav开始-->
+		<div th:replace="common :: navbar(2)"></div>
+		<!--nav结束-->
+		<div class="container">
+			<!--主体开始-->
+			<div class="container login-container" style="flex: 1 0 auto; width: 90%">
+				<!--开始-->
+				<div class="row section">
+					<div class="col s12 l12">
+						<div class="card " style="background-color: rgba(255,255,255,0.8)" >
+							<div class="card-image">
+								<img height="300px" width="1500px" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/seed/picsum/325/200?blur=4"  loading="lazy" >
+								<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
+                                    <span style="font-size: 64px;line-height: 240px;">
+                                        积分系统注册
+                                    </span>
+                            </span>
+							</div>
+							<div class="card-content" >
+								<form id="register-form" class="horizontal section">
 									<div class="row">
 										<div class="input-field col s12">
-											<i class="material-icons prefix">account_circle</i>
-											<input id="username" type="text"  class="validate" name="username" value="">
-											<label for="username">用户名</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix">account_circle</i>
-											<input id="mobile" type="text"  class="validate" name="mobile" value="">
+											<i class="material-icons prefix">perm_identity</i>
+											<input class="validate" id="mobile" maxlength="11" minlength="11" name="mobile"
+											       required="true" type="text" autocomplete="off"/>
 											<label for="mobile">手机号</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s12">
 											<i class="material-icons prefix">vpn_key</i>
-											<input id="password" type="password"  class="validate" name="password" value="">
+											<input class="validate form-control" id="password" maxlength="16" minlength="6" name="password"
+											       required="true" type="password"/>
 											<label for="password">密码</label>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-5">
-											<button class="btn btn-primary btn-block" onclick="reset()" type="reset">重置</button>
+										<div class="input-field col s12">
+											<i class="material-icons prefix">vpn_key</i>
+											<input class="validate form-control" id="confirm_password" maxlength="16" minlength="6" name="confirm_password"
+											       required="true" type="password"/>
+											<label for="confirm_password">确认密码</label>
 										</div>
 									</div>
-									<div class="col-md-5">
-										<!--更改布局-->
-										<div class="section row">
-											<div class="center-align">
-												<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
-												<button class="btn-large waves-effect waves-light pulse" onclick="register()" type="submit">注册</button>
-											</div>
+									<div class="section row">
+										<div class="center">
+											<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
+											<button class="btn-large waves-effect waves-light pulse" type="button" name="action"  id="register">注册
+											</button>
 										</div>
 									</div>
 								</form>
@@ -72,57 +64,74 @@
 						</div>
 					</div>
 				</div>
+				<!--结束-->
 			</div>
 		</div>
-		<!--结束-->
-
-
-	</div>
-	<!--主体结束-->
-
-	<div th:replace="common::footer"></div>
-
-	<!--参考的是投票系统-->
+		<!--左下角返回按钮-->
+		<div class="fixed-action-btn" style="right: 0; left: 40px">
+			<a class="btn-floating btn-large blue lighten-1" href="/login/do_login">
+				<i class="large material-icons">arrow_back</i>
+			</a>
+		</div>
+		<footer th:replace="common::footer"></footer>
+		<script color="0,0,0" opacity="0.5" count="99" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+	</body>
 	<script>
-			function register() {
-				$("#registerForm").validate({
-					submitHandler: function (form) {
-						doRegister();
-					}
-				});
-			}
+        M.AutoInit();
+        $("#register").click(function () {
+            doRegister();
+        })
 
-			function doRegister() {
-				g_showLoading();
+        //注册按钮
+        function doRegister(){
+            g_showLoading();
+            let password = $("#password").val();
+            let confirm = $("#confirm_password").val();
+            let username = $("#mobile").val();
+            if(!(password.length && confirm.length && username.length)){
+	            M.toast({
+	                html : "请填写完整！",
+	                classes : "rounded red"
+	            })
+            }else if(password != confirm) {
+                M.toast({
+                    html: "两次密码不一致！",
+                    classes: "rounded red"
+                })
+            }else{
+                let salt = g_passsword_salt;
+                let str = "" + salt.charAt(0) + salt.charAt(2) + password + salt.charAt(5) + salt.charAt(4);
+                password = md5(str);
+                $.ajax({
+                    url: '/login/do_register',
+                    type: 'post',
+                    data: {
+                        mobile: $("#mobile").val(),
+                        password: password
+                    },
+                    success : function (res) {
+                        layer.closeAll();
+                        if(res.code === 200001){
+                            M.toast({
+                                html : res.msg,
+                                classes : "green rounded"
+                            })
+                            window.location.replace("/login/do_login");
+                        }else{
+                            M.toast({
+                                html : res.msg,
+                                classes : "red rounded"
+                            })
+                        }
 
-				var inputPass = $("#password").val();
-				var salt = g_passsword_salt;
-				var str = "" + salt.charAt(0) + salt.charAt(2) + inputPass + salt.charAt(5) + salt.charAt(4);
-				var password = md5(str);
-
-				$.ajax({
-					url: "/login/do_login",
-					type: "POST",
-					data: {
-						username:$("#username").val(),
-						mobile: $("#mobile").val(),
-						password: password
-					},
-					success: function (data) {
-						layer.closeAll();
-						if (data.code == 0) {
-							layer.msg("成功");
-							// window.location.href = "/goods/to_list";
-						} else {
-							layer.msg(data.msg);
-						}
-					},
-					error: function () {
-						layer.closeAll();
-					}
-				});
-			}
-		</script>
-
-</body>
+                    },
+                    error : function (res){
+                        layer.closeAll();
+                    }
+                }).done(function (data){
+                    console.log(data.code);
+                })
+            }
+        }
+	</script>
 </html>

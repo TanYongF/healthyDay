@@ -103,7 +103,7 @@ public interface CreditTransactionDao {
             "\t\tifnull(sum(case year(ct.create_time) when year(now()) then 1 else 0 end) ,0) as `count_per_year`,\n" +
             "\t\tev.max_frequency_per_day as mfpd , ev.max_frequency_per_month mfpm, ev.max_frequency_per_year mfpy \n" +
             "\tfrom credit_transaction ct left join event ev on ct.event_id  = ev.id\n" +
-            "\twhere ct.event_id = #{eventId}\n" +
+            "\twhere ct.event_id = #{eventId} and ct.user_id = #{userId}\n" +
             ")as res;\n")
     boolean isValid(CreditTransaction creditRecord);
 }

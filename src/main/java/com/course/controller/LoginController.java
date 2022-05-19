@@ -4,16 +4,14 @@ import com.course.pojo.User;
 import com.course.result.CodeMsg;
 import com.course.result.Result;
 import com.course.service.UserService;
+import com.course.validator.NeedAuth;
 import com.course.vo.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +40,7 @@ public class LoginController {
      * @return
      */
     @ResponseBody
-    @PostMapping("/do_register/")
+    @PostMapping("/do_register")
     public Result<CodeMsg> doRegister(@Validated UserVO userVo) {
         userService.register(userVo.getMobile(), userVo.getPassword());
         return Result.success(CodeMsg.REGISTER_SUCCESS);
@@ -79,5 +77,14 @@ public class LoginController {
         logger.info("【用户登陆提醒】" + userVo.toString() + "尝试登陆....");
         userService.login(userVo, response);
         return Result.success(CodeMsg.SUCCESS);
+    }
+
+
+    @GetMapping("/logout")
+    @ResponseBody
+    @NeedAuth
+    public Result<CodeMsg> doLogout(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        userService.logout(request, user);
+        return Result.success(CodeMsg.LOGOUT_SUCCESS);
     }
 }
