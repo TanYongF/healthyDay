@@ -1,5 +1,7 @@
 package com.course.controller;
 
+import com.course.pojo.User;
+import com.course.validator.NeedAuth;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,8 +15,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HealthyController {
 
     @GetMapping("/index")
-    public String index(){
-        return "index";
+    @NeedAuth
+    public String getIndex(User user){
+        return "/admin/index";
+    }
+
+    @GetMapping("/health")
+    @NeedAuth
+    public String getHealthy(){
+        return "/admin/health";
+    }
+
+    @NeedAuth
+    @GetMapping("/activities")
+    public String getAllAct(){
+        return "/admin/activities";
     }
 
 

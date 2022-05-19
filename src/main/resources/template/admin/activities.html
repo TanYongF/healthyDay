@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+		<title>所有活动</title>
+		<!-- CSS  -->
+		<div th:replace="common::head"></div>
+	</head>
+	<body>
+		<div th:replace="common::root_navbar(1)"></div>
+		<!--所有活动的界面布局-->
+		<!--参考投票系统-->
+		<div class="section">
+			<div class="col s12">
+				<blockquote class="title" style="border-color: #4db6ac">
+					全部活动
+				</blockquote>
+			</div>
+			<div class="row">
+				<div class="col s4">
+					<div class="container">
+						<div class="card hoverable">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img height="229" src="aa.png" width="305">
+								<span class="card-title">门诊随访</span>
+							</div>
+							<div class="card-content">
+								<p>用户积分+3</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col s4">
+					<div class="container">
+						<div class="card hoverable">
+							<div class="card-image card-image waves-effect waves-block waves-light">
+								<img height="229" src="aa.png" width="305">
+								<span class="card-title">扩展活动</span>
+							</div>
+							<div class="card-content">
+								<p>用户积分+5</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col s4">
+					<div class="container">
+						<div class="card hoverable">
+							<div class="card-image card-image waves-effect waves-block waves-light">
+								<img height="229" src="aa.png" width="305">
+								<span class="card-title">科研招募</span>
+							</div>
+							<div class="card-content">
+								<p>用户积分+8</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+body {
+    background: url("https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/assessment/background.png") no-repeat center;
+    /*background-color: rgba(244,244,244);*/
+    background-size: cover;
+    background-attachment: fixed;
+    -moz-transform: scale(1);
+    -moz-transform-origin: 0 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+}
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+}
+.font-sans{
+    font-family: Lato,Noto Sans SC,-apple-system,sans-serif;
+}
+.bg{
+    background: url("/img/index-2.jpg") no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    -moz-transform: scale(1);
+    -moz-transform-origin: 0 0;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+
+/*-------------Color相关--------------*/
+.theme-color{
+    background-color: #4caf50!important;
+    /*background-color: #4db6ac;*/
+}
+.theme-text-color{
+    color:#4caf50 !important;
+}
+
+/*---------用户界面--------------*/
+
+#channelTitleSpan{
+    right: 0;
+    left: 0 !important;
+    text-align: center;
+    font-size: 43px;
+}
+
+/*----login---------*/
+.login-container{
+    width: 90%; !important;
+    margin-bottom: 6%;
+    margin-top: 6%;
+}

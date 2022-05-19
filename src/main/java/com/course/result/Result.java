@@ -6,7 +6,17 @@ public class Result<T> {
     private String msg;
     private T data;
 
+    private Result(CodeMsg codeMsg) {
+        if (codeMsg != null) {
+            this.code = codeMsg.getCode();
+            this.msg = codeMsg.getMsg();
+        }
+    }
     private Result(T data) {
+        if(data.getClass() == CodeMsg.class){
+            this.code = ((CodeMsg) data).getCode();
+            this.msg = ((CodeMsg) data).getMsg();
+        }
         this.data = data;
     }
 
@@ -15,18 +25,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    private Result(CodeMsg codeMsg) {
-        if (codeMsg != null) {
-            this.code = codeMsg.getCode();
-            this.msg = codeMsg.getMsg();
-        }
-    }
-
     /**
      * 成功时候的调用
      */
     public static <T> Result<T> success(T data) {
-        return new Result<T>(data);
+        return new Result<>(data);
     }
 
     /**
