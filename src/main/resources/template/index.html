@@ -1,46 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" style=""><head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<title>个人资料</title>
+
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="http://z7pjl1d5.dnat.tech:32241/layer/skin/default/layer.css?v=3.0.3303" id="layuicss-skinlayercss"></head><body><div>
 	<!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">
 	<link rel="stylesheet" href="/css/me.css" type="text/css">
+	<!--引入Jquery-->
 	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
-</head>
-<body>
+	<!-- jquery-validator -->
+	<script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="/layer/layer.js" type="text/javascript"></script>
+	<!-- md5.js -->
+	<script src="/js/md5.min.js" type="text/javascript"></script>
+	<!-- common.js -->
+	<script src="/js/common.js" type="text/javascript"></script>
+</div>
+
+
 <!--登陆后到这里-->
-<nav>
-	<div class="nav-wrapper teal lighten-2">
-		<a href="" class="brand-logo  center">个人资料</a>
+<nav class="theme-color" role="navigation">
+	<div class="nav-wrapper container">
+		<a href="./index.html" class="brand-logo">
+			<i class="material-icons large">blur_on</i>健康系统
+		</a>
+		<ul class="right hide-on-med-and-down">
+			<li class="active"><a href="/index" class="active">首页</a></li>
+			<li><a href="/activities">所有活动</a></li>
+			<li><a href="/health">血糖填报</a></li>
+			<li><a onclick="logout()">登出</a></li>
+		</ul>
 	</div>
 </nav>
 <div class="row">
 	<div class="col s4">
-		<div class="card horizontal large hoverable cyan lighten-5 hoverable" style="height: 900px; background-color: rgba(255,255,255,0.5)" >
-			基本信息
+		<div class="card horizontal large hoverable cyan lighten-5 hoverable" style="height: 900px; background-color: rgba(255,255,255,0.5)">
+			<p id="nickname">田静</p>
+			<p id="gender&quot;&quot;"></p>
+			<p id="email">n.vqtpxsj@qq.com</p>
+			<p id="info">in</p>
+			<p id="head">amet irure ea dolor</p>
+			<!--					<p id="gender"></p>-->
 		</div>
 	</div>
+	<!--修改：写并发症记录-->
 	<div class="col s8">
 		<div class="card hoverable">
-			<div class="card-image waves-effect waves-block waves-light">
-				<a href="/">
-					<img src="aa.png" width="305" height="229">
-					<span class="card-title">并发症记录</span>
-				</a>
+			<div class="card-image">
+				<img height="229" src="aa.png" width="305">
+				<span class="card-title blue darken-1">并发症记录</span>
 			</div>
 			<div class="card-content">
-				<p>积分+3</p>
+				<form id="complicationForm" method="post" name="complicationForm" >
+					<input id="complication" type="text"  class="validate" name="complication" value="">
+					<button class="btn-large waves-effect waves-light " onclick="complication()" type="submit" style="width:100px">保存</button>
+				</form>
 			</div>
-
 		</div>
 		<div class="card hoverable">
 			<div class="card-image waves-effect waves-block waves-light">
-				<a href="/">
+				<a href="/health">
 					<img src="aa.png" width="305" height="229">
-					<span class="card-title">健康监测</span>
+					<span class="card-title blue darken-1">健康监测</span>
 				</a>
 			</div>
 			<div class="card-content">
@@ -50,9 +76,9 @@
 		</div>
 		<div class="card hoverable">
 			<div class="card-image waves-effect waves-block waves-light">
-				<a href="/">
+				<a href="/activities">
 					<img src="aa.png" width="305" height="229">
-					<span class="card-title">活动</span>
+					<span class="card-title blue darken-1" >所有活动</span>
 				</a>
 			</div>
 			<div class="card-content">
@@ -64,7 +90,69 @@
 
 
 </div>
+<footer class="page-footer theme-color">
+	<script color="0,0,0" opacity="0.5" count="99" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+	<div class="container">
+		<div class="row">
+			<div class="col s12 l4 center">
+				<h5 class="title white-text">技术实现</h5>
+				<p>后端：Spring全家桶<br>主体使用HTML、CSS开发<br>Material Design风格<br>Jquery框架</p>
+			</div>
+			<div class="col s12 l4 center">
+				<h5 class="title white-text">开发人员</h5>
+				<ul>
+					<li>B19040229张雨桐</li>
+					<li>B19111330王雪臣</li>
+					<li>B19050115谭永锋</li>
+				</ul>
+			</div>
+			<div class="col s12 l4 center">
+				<h5 class="title white-text">产品理念</h5>
+				<ul>
+					<li>页面简约</li>
+					<li>高效运行</li>
+					<li>操作便捷</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2022 南京邮电大学软件实践项目作品
+			<a class="grey-text text-lighten-4 right" href="https://github.com/TanYongF/SimpleVotingSystem">项目地址【Github】</a>
+		</div>
+	</div>
+</footer><canvas id="c_n8" width="841" height="691" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+
+<script>
+
+        $(function () {
+            g_showLoading("加载个人信息中...");
+            $.ajax({
+                url: "/u/info",
+                type: "GET",
+                success: function (data) {
+                    layer.closeAll();
+                    console.log(data)
+                    if (data.code == 0) {
+                        let user = data.data
+                        $("#nickname").text(user.details.nickname);
+                        $("#gender").text(user.details.gender);
+                        $("#head").text(user.details.head);
+                        $("#info").text(user.details.info);
+                        $("#email").text(user.details.email);
+                        layer.msg("加载个人信息成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        })
 
 
-</body>
-</html>
+	</script>
+
+<div class="layui-layer-move"></div></body></html>
