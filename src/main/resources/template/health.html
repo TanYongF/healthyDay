@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 50%">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>健康检测</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css"type="text/css">
+    <link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/me.css" type="text/css">
+    <script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/v0.5.1/fingerprint.min.js"></script>
+
+</head>
+<body style="height: 100%; margin: 0">
+<!--健康检测-->
+<!--图表-->
+<div class="container" style="flex: 1 0 auto; width: 80%;height:50%">
+    <div id="container" style="height: 100%; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" _echarts_instance_="ec_1652661154178">
+        <div style="position: relative; width: 842px; height: 747px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+            <canvas data-zr-dom-id="zr_0" width="1350" height="1198" style="position: absolute; left: 0px; top: 0px; width: 842px; height: 747px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;">
+            </canvas>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+<!-- </div>  -->
+<!--其他-->
+<div class="container" style="flex: 1 0 auto; width: 95%">
+    <div class="row section  ">
+        <div class="col s12 l12">
+            <form id="healthForm" method="post" name="healthForm" style="width:50%; margin:0 auto">
+                <div class="row">
+                    <div class="input-field col s9">
+                        <i class="material-icons prefix">edit</i>
+                        <input id="bloodSugar" type="text"  class="validate" name="bloodSugar" value="">
+                        <label for="bloodSugar">血糖</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <button class="btn-large waves-effect waves-light " onclick="#" type="submit" style="width:200px">提交</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s9">
+                        <i class="material-icons prefix">edit</i>
+                        <input id="Islet" type="text"  class="validate" name="Islet" value="">
+                        <label for="Islet">胰岛</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <button class="btn-large waves-effect waves-light " onclick="#" type="submit" style="width:200px">监测胰岛</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line',
+      smooth: true
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
