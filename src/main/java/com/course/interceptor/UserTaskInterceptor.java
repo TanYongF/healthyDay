@@ -53,11 +53,12 @@ public class UserTaskInterceptor implements HandlerInterceptor{
         String token = RequestUtil.getTokenByRequest(request);
         User user = userService.getByToken(response, token);
         //每日登陆过滤器
-        loginUserTaskStrategy.finishedUserIntegralTask(user, token);
+        loginUserTaskStrategy.finishedUserIntegralTask(user, token, request);
+
         IUserTaskStrategy userStrategy = userTaskStrategyMap.get(uri);
         //其他接口过滤器
         if (userStrategy != null) {
-            userStrategy.finishedUserIntegralTask(user, token);
+            userStrategy.finishedUserIntegralTask(user, token, request);
         }
     }
 

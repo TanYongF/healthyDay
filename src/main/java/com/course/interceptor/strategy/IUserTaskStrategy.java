@@ -2,6 +2,8 @@ package com.course.interceptor.strategy;
 
 import com.course.pojo.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author tyf
  * @description define the strategy method
@@ -16,4 +18,5 @@ public interface IUserTaskStrategy {
      * @param token
      */
     void finishedUserIntegralTask(User user, String token);
+    void finishedUserIntegralTask(User user, String token, HttpServletRequest request);
 }

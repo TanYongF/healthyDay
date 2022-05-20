@@ -32,7 +32,7 @@ Date.prototype.format = function (format) {
 };
 
 function logout() {
-    g_showLoading();
+    g_showLoading("登出中...");
     $.ajax({
         url: "/login/logout",
         type: "GET",

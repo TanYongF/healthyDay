@@ -19,15 +19,14 @@ import java.time.LocalDate;
 
 @UserTaskStrategyType(uri = {"/index"})
 @Component
-public class LoginStrategy implements IUserTaskStrategy {
+public class LoginStrategy extends UserTaskStrategy{
 
-    @Autowired
-    UserService userService;
     @Autowired
     RedisService redisService;
 
-    @Autowired
-    CreditTransactionService creditTransactionService;
+    public LoginStrategy() {
+        super(Event.DAILY_LOGIN_RECORD);
+    }
 
     @Override
     public void finishedUserIntegralTask(User user, String token) {
