@@ -100,19 +100,20 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-configuration-processor</artifactId>
+      <version>2.6.7</version>
       <optional>true</optional>
     </dependency>
 
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-core</artifactId>
-      <version>5.8.0.M2</version>
+      <version>5.8.0</version>
     </dependency>
 
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-json</artifactId>
-      <version>5.8.0.M4</version>
+      <version>5.8.0</version>
     </dependency>
 
   </dependencies>

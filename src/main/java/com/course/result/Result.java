@@ -1,5 +1,8 @@
 package com.course.result;
 
+import lombok.Data;
+
+@Data
 public class Result<T> {
 
     private int code;
@@ -16,8 +19,9 @@ public class Result<T> {
         if(data.getClass() == CodeMsg.class){
             this.code = ((CodeMsg) data).getCode();
             this.msg = ((CodeMsg) data).getMsg();
+        }else{
+            this.data = data;
         }
-        this.data = data;
     }
 
     private Result(int code, String msg) {
