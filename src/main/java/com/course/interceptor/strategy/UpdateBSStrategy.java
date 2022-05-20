@@ -16,12 +16,6 @@ import org.springframework.stereotype.Component;
 @UserTaskStrategyType(uri = {"/bsr/update"})
 public class UpdateBSStrategy extends UserTaskStrategy {
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    CreditTransactionService creditTransactionService;
-
     public UpdateBSStrategy() {
         super(Event.UPDATE_BSR_RECORD);
     }

@@ -31,6 +31,12 @@ public class CodeMsg {
     // 数据模块 5003XX
     public static CodeMsg UPDATE_BSR_SUCCESSFUL = new CodeMsg(500300, "添加血糖数据成功");
     public static CodeMsg UPDATE_IR_SUCCESSFUL = new CodeMsg(500300, "添加胰岛素数据成功");
+
+    // 数据模块 5003XX
+    public static CodeMsg JOIN_ACTIVITY_SUCCESSFUL = new CodeMsg(500400, "参加活动成功");
+    public static CodeMsg ACTIVITY_HAVE_JOINED = new CodeMsg(500401, "已经参加过该活动");
+
+
     private int code;
     private String msg;
 

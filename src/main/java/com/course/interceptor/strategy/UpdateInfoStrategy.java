@@ -16,12 +16,6 @@ import org.springframework.stereotype.Component;
 @UserTaskStrategyType(uri = {"/u/update"})
 public class UpdateInfoStrategy extends UserTaskStrategy {
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    CreditTransactionService creditTransactionService;
-
     public UpdateInfoStrategy() {
         super(Event.UPDATE_USER_DETAIL);
     }

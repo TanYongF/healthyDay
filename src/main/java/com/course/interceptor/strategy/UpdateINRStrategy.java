@@ -14,17 +14,10 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @UserTaskStrategyType(uri = {"/inr/update"})
-public class UpdateINRStrategy implements IUserTaskStrategy {
+public class UpdateINRStrategy extends UserTaskStrategy {
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    CreditTransactionService creditTransactionService;
-
-    @Override
-    public void finishedUserIntegralTask(User user, String token) {
-        //insert the credit record in database
-        creditTransactionService.insert(user, Event.UPDATE_INR_RECORD);
+    public UpdateINRStrategy() {
+        super(Event.UPDATE_INR_RECORD);
     }
+
 }

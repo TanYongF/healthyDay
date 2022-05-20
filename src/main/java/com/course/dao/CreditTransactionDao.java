@@ -17,7 +17,7 @@ import java.util.List;
 public interface CreditTransactionDao {
 
     @Select("select * from credit_transaction where credit_transaction_id=#{id}")
-    public CreditTransaction getById(Integer id);
+    public CreditTransaction getById(Long id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into credit_transaction" +
@@ -106,4 +106,14 @@ public interface CreditTransactionDao {
             "\twhere ct.event_id = #{eventId} and ct.user_id = #{userId}\n" +
             ")as res;\n")
     boolean isValid(CreditTransaction creditRecord);
+
+
+    /**
+     * 根据用户
+     * @param user
+     * @param eventId
+     * @return
+     */
+    @Select("select * from credit_transaction ct where user_id = #{userId} and event_id = #{eventId}")
+    List<CreditTransaction> getByIdAndEventId(@Param("userId")Long userId, @Param("eventId") Long eventId);
 }
