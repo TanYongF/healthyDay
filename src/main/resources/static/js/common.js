@@ -56,3 +56,8 @@ function logout() {
 
 }
 
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+});
+
+
