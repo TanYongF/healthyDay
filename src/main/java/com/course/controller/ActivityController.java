@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @describe: 活动 Controller
  * @author: tyf
@@ -28,6 +30,12 @@ public class ActivityController {
     @Autowired
     CreditTransactionService creditTransactionService;
 
+    /**
+     * 获取特定活动
+     * @param user
+     * @param activityId
+     * @return
+     */
     @GetMapping("/{activityId}")
     @ResponseBody
     @NeedAuth
@@ -36,6 +44,25 @@ public class ActivityController {
         return Result.success(activity);
     }
 
+    /**
+     * 获取全部活动
+     * @param user
+     * @return
+     */
+    @GetMapping("")
+    @ResponseBody
+    @NeedAuth
+    public Result<List<Activity>> getAllActivities(User user){
+        List<Activity> activityList = activityService.getAll();
+        return Result.success(activityList);
+    }
+
+    /**
+     * 用户参加活动接口
+     * @param user
+     * @param activityId
+     * @return
+     */
     @PostMapping("/join")
     @ResponseBody
     @NeedAuth
@@ -45,6 +72,6 @@ public class ActivityController {
         if(!canJoin){
             throw new GlobalException(CodeMsg.ACTIVITY_HAVE_JOINED);
         }
-        return Result.success(CodeMsg.JOIN_ACTIVITY_SUCCESSFUL);
+        return Result.success(CodeMsg.SUCCESS);
     }
 }

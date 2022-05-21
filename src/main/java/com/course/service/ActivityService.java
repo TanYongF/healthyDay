@@ -36,4 +36,9 @@ public class ActivityService {
         Activity activity = activityDao.getById(activityId);
         return activity;
     }
+
+    public List<Activity> getAll() {
+        List<Activity> activities = activityDao.getAll();
+        return activities;
+    }
 }

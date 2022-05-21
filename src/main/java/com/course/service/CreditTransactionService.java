@@ -22,6 +22,7 @@ public class CreditTransactionService {
     CreditTransactionDao creditTransactionDao;
 
 
+
     /**
      * 插入积分记录
      * @param user 用户

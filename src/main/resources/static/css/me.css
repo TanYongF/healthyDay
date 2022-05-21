@@ -33,6 +33,7 @@ main {
 /*-------------Color相关--------------*/
 .theme-color{
     background-color: #4caf50!important;
+    border-color:  #4caf50!important;
     /*background-color: #4db6ac;*/
 }
 .theme-text-color{

@@ -71,4 +71,11 @@ public interface ActivityDao {
     )
     List<Activity> selectList(Activity activity);
 
+    /**
+     * 获取全部活动
+     * @return 活动列表
+     */
+    @Select("select * from activity")
+    List<Activity> getAll();
+
 }
