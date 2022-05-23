@@ -35,9 +35,7 @@ public class UserInfoController {
     @NeedAuth
     @PostMapping("/update")
     public Result<CodeMsg> updateUserInfo(User user, @RequestBody UserInfoVO userInfoVO) {
-        if (!Long.toString(user.getId()).equals(userInfoVO.getId())) {
-            return Result.success(CodeMsg.SERVER_ERROR);
-        }
+        userInfoVO.setId(user.getId() + "");
         userInfoService.updateInfo(userInfoVO);
         return Result.success(CodeMsg.SUCCESS);
     }

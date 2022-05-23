@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>健康检测</title>
-    <!-- CSS  -->
-    <div th:replace="common::head"></div>
-</head>
-<body>
-    <div th:replace="common::root_navbar(2)"></div>
-<!--健康检测-->
-<!--图表-->
-    <div class="container" style="flex: 1 0 auto; width: 80%;height:50%">
-        <div id="container" style="height: 100%; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" _echarts_instance_="ec_1652661154178">
-            <div style="position: relative; width: 842px; height: 747px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas data-zr-dom-id="zr_0" width="1350" height="1198" style="position: absolute; left: 0px; top: 0px; width: 842px; height: 747px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;">
-                </canvas>
+    <head th:replace="common :: header(~{::title},~{}, ~{})">
+        <title>健康填报界面</title>
+    </head>
+    <body>
+        <div th:replace="common::root_navbar(2)"></div>
+        <!--健康检测-->
+        <!--图表-->
+<!--        <div class="container" style="flex: 1 0 auto; width: 80%;height:50%">-->
+<!--            <div id="container" style="height: 100%; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" _echarts_instance_="ec_1652661154178">-->
+<!--                <div style="position: relative; width: 842px; height: 747px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">-->
+<!--                    <canvas data-zr-dom-id="zr_0" width="1350" height="1198" style="position: absolute; left: 0px; top: 0px; width: 842px; height: 747px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;">-->
+<!--                    </canvas>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    <!--其他-->
+    <div class="container">
+        <div class="row">
+            <blockquote>今日概况</blockquote>
+            <div class="col s4 center">
+                <div class="card-panel blue lighten-2 white-text">
+                    <span class="valign-wrapper "><i>总投票量：</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="totalVotingNums">58</strong></span>
+                </div>
+            </div>
+            <div class="col s4 center">
+                <div class="card-panel green lighten-2 white-text">
+                    <span class="valign-wrapper "><i>今日投票：</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="MaxVotingNums">0</strong></span>
+                </div>
+            </div>
+            <div class="col s4 center">
+                <div class="card-panel red lighten-2 white-text">
+                    <span class="valign-wrapper "><i>单频道今日投票最高：</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="MAXVotingChannels">0</strong></span>
+                </div>
             </div>
         </div>
-    </div>
-<!--其他-->
-<div class="container" style="flex: 1 0 auto; width: 95%">
-    <div class="row section  ">
-        <div class="col s12 l12">
-            <form id="loginForm" method="post" name="loginForm" style="width:50%; margin:0 auto">
-                <div class="row">
-                    <div class="input-field col s9">
-                        <i class="material-icons prefix">edit</i>
-                        <input id="bloodSugar" type="text"  class="validate" name="bloodSugar" value="">
-                        <label for="bloodSugar">血糖</label>
+        <div class="card-panel" style="background-color: rgba(255,255,255,0.3); ">
+            <div class="row section">
+                <div class="col s12 l12">
+                    <div class="row">
+                        <div class="input-field col s9">
+                            <i class="material-icons prefix">edit</i>
+                            <input id="bsrValue" type="text"  class="validate" name="bloodSugar" value="">
+                            <label for="bsrValue">今日血糖含量</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <button class="btn waves-effect waves-light "  onclick="postBSR()"  style="width:100%">提交</button>
+                        </div>
                     </div>
-                    <div class="input-field col s3">
-                        <button class="btn-large waves-effect waves-light " onclick="#" type="submit" style="width:200px">提交</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s9">
-                        <i class="material-icons prefix">edit</i>
-                        <input id="Islet" type="text"  class="validate" name="Islet" value="">
-                        <label for="Islet">胰岛</label>
-                    </div>
-                    <div class="input-field col s3">
-                        <button class="btn-large waves-effect waves-light " onclick="#" type="submit" style="width:200px">监测胰岛</button>
+                    <div class="row">
+                        <div class="input-field col s9">
+                            <i class="material-icons prefix">edit</i>
+                            <input id="inrValue" type="text"  class="validate" name="Islet" value="" >
+                            <label for="inrValue">胰岛</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <button class="btn waves-effect waves-light"  onclick="postINR()" style="width:100%">监测胰岛</button>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
-</body>
+    </div>
+
+    </body>
     <script type="text/javascript">
         var dom = document.getElementById('container');
         var myChart = echarts.init(dom, null, {
@@ -57,7 +76,6 @@
             useDirtyRect: false
         });
         var app = {};
-
         var option;
 
         option = {
@@ -82,5 +100,61 @@
         }
 
         window.addEventListener('resize', myChart.resize);
+
+        function postBSR() {
+            let formData = {
+                "value": $("#bsrValue").val(),
+                "recordTime": new Date().format("yyyy-MM-dd hh:mm:ss")
+            }
+            let jsonData = JSON.stringify(formData);
+            alert(jsonData)
+            $.ajax({
+                url: "/bsr/update",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: jsonData,
+                success: function (data) {
+                    layer.closeAll();
+                    console.log(data)
+                    if (data.code == 500300) {
+                        layer.msg("今日填报血糖含量成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+        function postINR() {
+            let formData = {
+                "value": $("#inrValue").val(),
+                "recordTime": new Date().format("yyyy-MM-dd hh:mm:ss")
+            }
+            let jsonData = JSON.stringify(formData);
+            alert(jsonData)
+            $.ajax({
+                url: "/inr/update",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: jsonData,
+                success: function (data) {
+                    layer.closeAll();
+                    console.log(data)
+                    if (data.code == 500300) {
+                        layer.msg("今日填报胰岛素成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
     </script>
 </html>

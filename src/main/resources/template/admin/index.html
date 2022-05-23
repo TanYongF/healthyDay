@@ -1,27 +1,94 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<head th:replace="common :: header(~{::title},~{}, ~{})">
 		<title>个人资料</title>
-		<div th:replace="common::head"></div>
 	</head>
 	<body>
 		<!--登陆后到这里-->
 		<div th:replace="common::root_navbar(0)"></div>
-		<div class="row">
+		<div class="row" style="width: 90%">
+			<!--个人下部戏开始-->
 			<div class="col s4">
-				<div class="card horizontal large hoverable cyan lighten-5 hoverable"
-				     style="height: 900px; background-color: rgba(255,255,255,0.5)">
-					<p id="nickname"></p>
-					<p id=gender""></p>
-					<p id="email"></p>
-					<p id="info"></p>
-					<p id="head"></p>
-<!--					<p id="gender"></p>-->
+				<blockquote style="border-color: green">个人概况</blockquote>
+				<div class="card horizontal" style="">
+					<div class="container">
+						<div class="row">
+							<div class="col s12 center" style="margin-top: 30px">
+								<img id="head" src="https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300" style="width:50%" class="circle responsive-img">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col s12">
+								<form>
+									<div class="form-group">
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix">account_circle</i>
+												<label for="nicknameEdit">你的昵称</label>
+												<input type="text" class="form-control validate" id="nicknameEdit">
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">face</i>
+
+												<select id="genderEdit">
+<!--													<option value="" disabled selected>Choose your option</option>-->
+													<option value="1">男</option>
+													<option value="0">女</option>
+<!--													<option value="3">Option 3</option>-->
+												</select>
+												<label>你的性别</label>
+<!--												<input type="text" class="form-control validate" id="genderEdit">-->
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">comment</i>
+												<label for="infoEdit">你的个人信息</label>
+												<input type="text" class="form-control validate" id="infoEdit">
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">email</i>
+												<label for="emailEdit">你的邮箱</label>
+												<input type="text" class="form-control validate" id="emailEdit">
+											</div>
+										</div>
+									</div>
+									<div class="center">
+										<a class="btn-floating btn-large waves-effect waves-light theme-color" onclick="updateInfo()"><i class="material-icons">send</i></a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-panel horizontal teal" style="">
+			        <span class="white-text">你可以完成各项任务获得积分！</span>
 				</div>
 			</div>
+			<!--图表开始-->
 			<div class="col s8">
+				<div class="row">
+					<blockquote>今日概况</blockquote>
+					<div class="col s4 center">
+						<div class="card-panel blue lighten-2 white-text">
+							<span class="valign-wrapper"><i>总积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="totalPoints">58</strong></span>
+						</div>
+					</div>
+					<div class="col s4 center">
+						<div class="card-panel green lighten-2 white-text">
+							<span class="valign-wrapper "><i>基础积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="growScore">0</strong></span>
+						</div>
+					</div>
+					<div class="col s4 center">
+						<div class="card-panel red lighten-2 white-text">
+							<span class="valign-wrapper "><i>可兑换积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="effectiveExchangeScore">0</strong></span>
+						</div>
+					</div>
+				</div>
+				<blockquote>积分记录</blockquote>
 				<div class="card hoverable">
 					<div class="card-image">
 						<img height="229" src="aa.png" width="305">
@@ -34,6 +101,7 @@
 						<a href="#">这是一个链接</a>
 					</div>
 				</div>
+				<blockquote>可兑换积分记录</blockquote>
 				<div class="card hoverable">
 					<div class="card-image">
 						<img height="229" src="aa.png" width="305">
@@ -46,28 +114,14 @@
 						<a href="#">这是一个链接</a>
 					</div>
 				</div>
-				<div class="card hoverable">
-					<div class="card-image">
-						<img height="229" src="aa.png" width="305">
-						<span class="card-title">活动</span>
-					</div>
-					<div class="card-content">
-						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
-					</div>
-					<div class="card-action">
-						<a href="#">这是一个链接</a>
-					</div>
-				</div>
 			</div>
-
-
 		</div>
+
 		<div th:replace="common::footer"></div>
 	</body>
 	<script>
 
-        $(function () {
-            g_showLoading("加载个人信息中...");
+		function loadUserInfo(){
             $.ajax({
                 url: "/u/info",
                 type: "GET",
@@ -76,11 +130,29 @@
                     console.log(data)
                     if (data.code == 0) {
                         let user = data.data
-                        $("#nickname").text(user.details.nickname);
-                        $("#gender").text(user.details.gender);
-                        $("#head").text(user.details.head);
-                        $("#info").text(user.details.info);
-                        $("#email").text(user.details.email);
+                        $("#nicknameEdit").val(user.details.nickname);
+                        // $("#genderEdit").val(user.details.gender+"");
+                        var count=$("#genderEdit  option").length;
+                        for(var i=0;i<count;i++) {
+                            if($("#genderEdit").get(0).options[i].text == "女") {
+	                            $("#genderEdit").get(0).options[i].selected = true;
+	                            break;
+	                        }
+                        }
+                        // $("#genderEdit").val
+                        // $("#head").setAttribute("src", user.details.head)
+	                    if(user.details.head == null){
+                            $("#head").attr("src", "https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300")
+	                    }else{
+                            $("#head").attr("src", user.details.head)
+	                    }
+
+                        $("#infoEdit").val(user.details.info);
+                        $("#emailEdit").val(user.details.email);
+                        $("#growScore").text(user.growScore);
+                        $("#effectiveExchangeScore").text(user.effectiveExchangeScore)
+                        $("#totalPoints").text(user.growScore + user.effectiveExchangeScore)
+                        M.updateTextFields();
                         layer.msg("加载个人信息成功", {icon: 1});
                     } else {
                         layer.msg(data.msg);
@@ -90,7 +162,43 @@
                     layer.closeAll();
                 }
             });
+		}
+
+        $(function () {
+            g_showLoading("加载个人信息中...");
+            loadUserInfo();
+            layer.closeAll();
         })
+
+        function updateInfo(){
+            let formUserInfoData = {
+                nickname: $("#nicknameEdit").val(),
+                gender:$("#genderEdit").val(),
+                head: $("#head").src,
+                email:$("#emailEdit").val(),
+                info:$("#infoEdit").val()
+            }
+            let jsonUserInfo = JSON.stringify(formUserInfoData);
+            alert(jsonUserInfo)
+            $.ajax({
+                url: "/u/update",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+	            data: jsonUserInfo,
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.msg("更新个人信息成功", {icon: 1});
+                        loadUserInfo();
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
 
 
 	</script>
