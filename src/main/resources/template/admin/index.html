@@ -8,9 +8,9 @@
 		<!--登陆后到这里-->
 		<div th:replace="common::root_navbar(0)"></div>
 		<div class="row" style="width: 90%">
-			<!--个人下部戏开始-->
-			<div class="col s4">
-				<blockquote style="border-color: green">个人概况</blockquote>
+			<!--个人信息开始-->
+			<div class="col s12 m4">
+				<blockquote style="border-color: green">个人积分概况</blockquote>
 				<div class="card horizontal" style="">
 					<div class="container">
 						<div class="row">
@@ -61,12 +61,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="card-panel horizontal teal" style="">
-			        <span class="white-text">你可以完成各项任务获得积分！</span>
+				<blockquote style="border-color: green">其他情况</blockquote>
+				<div class="card-panel horizontal" style="">
+
+					<div>
+						<h5 class="center-align" style="font-size: 20px">如果您有并发症状，请填写以下内容</h5>
+					</div>
+
+					<form>
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">favorite_border
+								</i>
+								<textarea id="complicationEdit" class="materialize-textarea" data-length="120"></textarea>
+								<label for="complicationEdit">并发症</label>
+							</div>
+						</div>
+					</form>
+					<div class="center">
+						<a class="btn-floating btn-large waves-effect waves-light green" onclick="updateComplication()"><i class="material-icons">send</i></a>
+					</div>
 				</div>
 			</div>
+			<!--个人信息结束-->
 			<!--图表开始-->
-			<div class="col s8">
+			<div class="col s12 m8">
+				<!--今日概况开始-->
 				<div class="row">
 					<blockquote>今日概况</blockquote>
 					<div class="col s4 center">
@@ -88,45 +108,126 @@
 						</div>
 					</div>
 				</div>
-				<blockquote>积分记录</blockquote>
-				<div class="card hoverable">
-					<div class="card-image">
-						<img height="229" src="aa.png" width="305">
-						<span class="card-title">并发症记录</span>
-					</div>
-					<div class="card-content">
-						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
-					</div>
-					<div class="card-action">
-						<a href="#">这是一个链接</a>
-					</div>
-				</div>
-				<blockquote>可兑换积分记录</blockquote>
-				<div class="card hoverable">
-					<div class="card-image">
-						<img height="229" src="aa.png" width="305">
-						<span class="card-title">健康监测</span>
-					</div>
-					<div class="card-content">
-						<p>我是一个很简单的卡片。我很擅长于包含少量的信息。我很方便，因为我只需要一个小标记就可以有效地使用。</p>
-					</div>
-					<div class="card-action">
-						<a href="#">这是一个链接</a>
+				<!--今日概况结束-->
+
+				<!--基础积分开始-->
+				<div class="row">
+					<div class="card">
+						<div class="card-content">
+							<blockquote style="border-color: #2aabd2">成长积分记录(最近记录)</blockquote>
+							<table class="centered responsive-table">
+								<thead>
+									<tr>
+										<th>积分项目</th>
+										<th>分数</th>
+										<th>获取时间</th>
+									</tr>
+								</thead>
+								<tbody id="growCreditBody">
+								</tbody>
+							</table>
+							<br>
+							<blockquote style="border-color: blueviolet">可兑换积分记录(最近记录)</blockquote>
+							<table class="centered responsive-table">
+								<thead>
+									<tr>
+										<th>积分项目</th>
+										<th>分数</th>
+										<th>获取时间</th>
+										<th>失效时间</th>
+									</tr>
+								</thead>
+								<tbody id="exchangeCreditBody">
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!--图表结束-->
 		</div>
 
 		<div th:replace="common::footer"></div>
 	</body>
 	<script>
 
-		function loadUserInfo(){
+        /**
+         * 加载用户信息函数
+         */
+        $(function () {
+            g_showLoading("加载个人信息中...");
+            try {
+                loadUserInfo();
+                loadRecord();
+            }catch (e) {
+                console.log(e)
+            }finally {
+                layer.msg("更新个人信息成功", {icon: 1});
+	            layer.closeAll();
+            }
+        })
+
+        /**
+         * 加载积分记录
+         */
+		function loadRecord(){
+            $.ajax({
+                url: "/u/ctr",
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                    if (data.code == 0) {
+                        let growCreditRecords = data.data[0]
+	                    for(let i = 0; i < Math.min(growCreditRecords.length,7); i++){
+                            let growCreditRecord = growCreditRecords[i];
+                            let tr = document.createElement('tr');
+                            let td1 = document.createElement('td');
+                            let td2 = document.createElement('td');
+                            let td3 = document.createElement('td');
+                            td1.innerText = growCreditRecord.info;
+                            td2.innerText = "+" + growCreditRecord.points;
+                            td3.innerText = growCreditRecord.createTime.replace("T", " ");
+                            tr.appendChild(td1)
+                            tr.appendChild(td2)
+		                    tr.appendChild(td3)
+		                    $("#growCreditBody").append(tr);
+	                    }
+                        let exchangeCreditRecords = data.data[1]
+                        for(let i = 0; i < Math.min(exchangeCreditRecords.length,6); i++){
+                            let exchangeCreditRecord = exchangeCreditRecords[i];
+                            let tr = document.createElement('tr');
+                            let td1 = document.createElement('td');
+                            let td2 = document.createElement('td');
+                            let td3 = document.createElement('td');
+                            let td4 = document.createElement('td');
+                            td1.innerText = exchangeCreditRecord.info;
+                            td2.innerText = "+" + exchangeCreditRecord.points;
+                            td3.innerText = exchangeCreditRecord.createTime.replace("T", " ");
+                            td4.innerText = exchangeCreditRecord.expiredTime.replace("T", " ");
+                            tr.appendChild(td1)
+                            tr.appendChild(td2)
+                            tr.appendChild(td3)
+                            tr.appendChild(td4)
+                            $("#exchangeCreditBody").append(tr);
+                        }
+                    } else {
+                        layer.msg("获取积分记录失败")
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+		}
+
+        /**
+         * 加载用户信息
+         */
+        function loadUserInfo(){
             $.ajax({
                 url: "/u/info",
                 type: "GET",
                 success: function (data) {
-                    layer.closeAll();
                     console.log(data)
                     if (data.code == 0) {
                         let user = data.data
@@ -135,23 +236,22 @@
                         var count=$("#genderEdit  option").length;
                         for(var i=0;i<count;i++) {
                             if($("#genderEdit").get(0).options[i].text == "女") {
-	                            $("#genderEdit").get(0).options[i].selected = true;
-	                            break;
-	                        }
+                                $("#genderEdit").get(0).options[i].selected = true;
+                                break;
+                            }
                         }
-                        // $("#genderEdit").val
-                        // $("#head").setAttribute("src", user.details.head)
-	                    if(user.details.head == null){
+                        if(user.details.head == null){
                             $("#head").attr("src", "https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300")
-	                    }else{
+                        }else{
                             $("#head").attr("src", user.details.head)
-	                    }
-
+                        }
                         $("#infoEdit").val(user.details.info);
                         $("#emailEdit").val(user.details.email);
                         $("#growScore").text(user.growScore);
                         $("#effectiveExchangeScore").text(user.effectiveExchangeScore)
                         $("#totalPoints").text(user.growScore + user.effectiveExchangeScore)
+                        $('#complicationEdit').val(user.details.complication);
+                        M.textareaAutoResize($('#complicationEdit'));
                         M.updateTextFields();
                         layer.msg("加载个人信息成功", {icon: 1});
                     } else {
@@ -162,13 +262,7 @@
                     layer.closeAll();
                 }
             });
-		}
-
-        $(function () {
-            g_showLoading("加载个人信息中...");
-            loadUserInfo();
-            layer.closeAll();
-        })
+        }
 
         function updateInfo(){
             let formUserInfoData = {
@@ -179,17 +273,16 @@
                 info:$("#infoEdit").val()
             }
             let jsonUserInfo = JSON.stringify(formUserInfoData);
-            alert(jsonUserInfo)
             $.ajax({
                 url: "/u/update",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
-	            data: jsonUserInfo,
+                data: jsonUserInfo,
                 success: function (data) {
                     if (data.code == 0) {
-                        layer.msg("更新个人信息成功", {icon: 1});
-                        loadUserInfo();
+                        // loadUserInfo();
+                        layer.msg("更新用户信息成功", {icon:1})
                     } else {
                         layer.msg(data.msg);
                     }
@@ -199,6 +292,33 @@
                 }
             });
         }
+        function updateComplication(){
+            let formUserInfoData = {
+                complication : $("#complicationEdit").val()
+            }
+            let jsonUserInfo = JSON.stringify(formUserInfoData);
+            $.ajax({
+                url: "/u/updateComplication",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: jsonUserInfo,
+                success: function (data) {
+                    console.log(data)
+                    if (data.code == 0) {
+                        layer.msg("更新个人并发症成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+
+
 
 
 	</script>

@@ -2,11 +2,15 @@ package com.course.service;
 
 import com.course.dao.CreditTransactionDao;
 import com.course.dao.UserDao;
+import com.course.pojo.CreditTransaction;
 import com.course.pojo.User;
+import com.course.vo.CreditTransactionVO;
 import com.course.vo.UserDTO;
 import com.course.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @describe: 用户信息Service
@@ -64,5 +68,10 @@ public class UserInfoService {
         User toBeUpdate = userService.getById(Long.parseLong(userInfoVO.getId()));
         toBeUpdate.setComplication(userInfoVO.getComplication());
         userService.updateInfo(toBeUpdate);
+    }
+
+    public List<CreditTransactionVO> getCreditRecordByType(Long userId, Byte type) {
+        List<CreditTransactionVO> recordById = creditTransactionDao.getCreditRecordByIdAndType(userId, type);
+        return recordById;
     }
 }

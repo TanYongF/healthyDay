@@ -14,8 +14,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class UserInfoVO {
 
-    @IsMobile
-    @NotBlank
+//    @IsMobile
+//    @NotBlank
     private String id;
     private String nickname;
     private Byte gender;

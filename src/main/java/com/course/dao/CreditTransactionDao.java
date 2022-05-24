@@ -1,6 +1,7 @@
 package com.course.dao;
 
 import com.course.pojo.CreditTransaction;
+import com.course.vo.CreditTransactionVO;
 import com.course.vo.UserDTO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -116,4 +117,16 @@ public interface CreditTransactionDao {
      */
     @Select("select * from credit_transaction ct where user_id = #{userId} and event_id = #{eventId}")
     List<CreditTransaction> getByIdAndEventId(@Param("userId")Long userId, @Param("eventId") Long eventId);
+
+
+    /**
+     * 根据类型获取用户可兑换积分
+     * @param userId 用户ID
+     * @param type
+     */
+    @Select("select * \n" +
+            "from credit_transaction ct left join event e on ct.event_id  = e.id\n" +
+            "where ct.user_id = #{userId} and e.type = #{type} " +
+            "order by ct.create_time desc")
+    List<CreditTransactionVO> getCreditRecordByIdAndType(Long userId, Byte type);
 }

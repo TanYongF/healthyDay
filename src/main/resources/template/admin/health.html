@@ -19,30 +19,36 @@
     <!--其他-->
     <div class="container">
         <div class="row">
-            <blockquote>今日概况</blockquote>
+            <blockquote>今日健康概况</blockquote>
             <div class="col s4 center">
-                <div class="card-panel blue lighten-2 white-text">
-                    <span class="valign-wrapper "><i>总投票量：</i></span>
+                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper"><i>胰岛素含量</i></span>
                     <span style="font-size: 60px; font-family: Consolas"><strong id="totalVotingNums">58</strong></span>
                 </div>
             </div>
             <div class="col s4 center">
-                <div class="card-panel green lighten-2 white-text">
-                    <span class="valign-wrapper "><i>今日投票：</i></span>
+                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper "><i>血糖含量</i></span>
                     <span style="font-size: 60px; font-family: Consolas"><strong id="MaxVotingNums">0</strong></span>
                 </div>
             </div>
             <div class="col s4 center">
-                <div class="card-panel red lighten-2 white-text">
-                    <span class="valign-wrapper "><i>单频道今日投票最高：</i></span>
+                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper "><i>健康评级</i></span>
                     <span style="font-size: 60px; font-family: Consolas"><strong id="MAXVotingChannels">0</strong></span>
                 </div>
             </div>
         </div>
-        <div class="card-panel" style="background-color: rgba(255,255,255,0.3); ">
-            <div class="row section">
-                <div class="col s12 l12">
-                    <div class="row">
+        <div class="row">
+            <blockquote>血糖健康监测</blockquote>
+            <div class="col s12 l8">
+                <div class="card">
+                    <div>tun1</div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card">
+
                         <div class="input-field col s9">
                             <i class="material-icons prefix">edit</i>
                             <input id="bsrValue" type="text"  class="validate" name="bloodSugar" value="">
@@ -51,8 +57,20 @@
                         <div class="input-field col s3">
                             <button class="btn waves-effect waves-light "  onclick="postBSR()"  style="width:100%">提交</button>
                         </div>
-                    </div>
-                    <div class="row">
+                    
+                </div>
+            </div>
+        </div>
+        <div>
+            <blockquote>胰岛素含量监测</blockquote>
+            <div class="col s12 l8">
+                <div class="card">
+                    <div>tun1</div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card">
+
                         <div class="input-field col s9">
                             <i class="material-icons prefix">edit</i>
                             <input id="inrValue" type="text"  class="validate" name="Islet" value="" >
@@ -61,12 +79,13 @@
                         <div class="input-field col s3">
                             <button class="btn waves-effect waves-light"  onclick="postINR()" style="width:100%">监测胰岛</button>
                         </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-
     </div>
+
+        <div th:replace="common::footer"></div>
 
     </body>
     <script type="text/javascript">
