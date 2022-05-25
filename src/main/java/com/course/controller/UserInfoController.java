@@ -1,12 +1,11 @@
 package com.course.controller;
 
-import com.course.pojo.CreditTransaction;
 import com.course.pojo.User;
 import com.course.result.CodeMsg;
 import com.course.result.Result;
 import com.course.service.UserInfoService;
 import com.course.validator.NeedAuth;
-import com.course.vo.CreditTransactionVO;
+import com.course.vo.CreditTransactionDTO;
 import com.course.vo.UserDTO;
 import com.course.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +62,10 @@ public class UserInfoController {
     @ResponseBody
     @NeedAuth
     @GetMapping("/ctr")
-    public Result<HashMap<Integer, List<CreditTransactionVO>>> getCreditRecord(User user){
-        HashMap<Integer, List<CreditTransactionVO>> record = new HashMap<>();
-        List<CreditTransactionVO> gcRecords = userInfoService.getCreditRecordByType(user.getId(), (byte) 0);
-        List<CreditTransactionVO> ecRecords = userInfoService.getCreditRecordByType(user.getId(), (byte) 1);
+    public Result<HashMap<Integer, List<CreditTransactionDTO>>> getCreditRecord(User user){
+        HashMap<Integer, List<CreditTransactionDTO>> record = new HashMap<>();
+        List<CreditTransactionDTO> gcRecords = userInfoService.getCreditRecordByType(user.getId(), (byte) 0);
+        List<CreditTransactionDTO> ecRecords = userInfoService.getCreditRecordByType(user.getId(), (byte) 1);
         record.put(0, gcRecords);
         record.put(1, ecRecords);
         return Result.success(record);

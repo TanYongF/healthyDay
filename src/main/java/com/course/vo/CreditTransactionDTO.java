@@ -1,7 +1,5 @@
 package com.course.vo;
 
-import com.alibaba.druid.filter.AutoLoad;
-import com.course.pojo.CreditTransaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditTransactionVO {
+public class CreditTransactionDTO {
     private LocalDateTime createTime;
     private LocalDateTime expiredTime;
     private String  info;

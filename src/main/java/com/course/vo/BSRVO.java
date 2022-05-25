@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,7 +24,9 @@ public class BSRVO {
 
     private Long userId;
 
-    @Digits(integer = 1, fraction = 2)
+    @Digits(integer = 1, fraction = 4)
+    @Max(8)
+    @Min(3)
     private BigDecimal value;
 
     @Past

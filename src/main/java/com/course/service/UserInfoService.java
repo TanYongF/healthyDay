@@ -2,9 +2,8 @@ package com.course.service;
 
 import com.course.dao.CreditTransactionDao;
 import com.course.dao.UserDao;
-import com.course.pojo.CreditTransaction;
 import com.course.pojo.User;
-import com.course.vo.CreditTransactionVO;
+import com.course.vo.CreditTransactionDTO;
 import com.course.vo.UserDTO;
 import com.course.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +69,8 @@ public class UserInfoService {
         userService.updateInfo(toBeUpdate);
     }
 
-    public List<CreditTransactionVO> getCreditRecordByType(Long userId, Byte type) {
-        List<CreditTransactionVO> recordById = creditTransactionDao.getCreditRecordByIdAndType(userId, type);
+    public List<CreditTransactionDTO> getCreditRecordByType(Long userId, Byte type) {
+        List<CreditTransactionDTO> recordById = creditTransactionDao.getCreditRecordByIdAndType(userId, type);
         return recordById;
     }
 }

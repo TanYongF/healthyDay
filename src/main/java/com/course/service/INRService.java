@@ -21,7 +21,7 @@ public class INRService {
     INRDao inrDao;
 
     public List<InsulinRecord> getMonthRecord(Long id) {
-        return inrDao.getById(id);
+        return inrDao.getById(id, 3);
     }
 
     public void updateINValue(INRVO inrVo) {

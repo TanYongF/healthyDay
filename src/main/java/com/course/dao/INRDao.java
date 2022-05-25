@@ -22,8 +22,12 @@ public interface INRDao {
      * @param userId 用户Id
      * @return 结果集
      */
-    @Select("select * from insulin_record where user_id = #{userId}")
-    List<InsulinRecord> getById(Long userId);
+    @Select("\n" +
+            "select record_time , value\n" +
+            "from insulin_record ir \n" +
+            "where user_id = #{userId} and to_days(now()) - to_days(record_time) <= #{days};\n" +
+            "\n")
+    List<InsulinRecord> getById(Long userId, int days);
 
 
     /**

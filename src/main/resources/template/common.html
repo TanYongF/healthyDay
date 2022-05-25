@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-	<head th:fragment="header(title, links, scripts)">
-
-		<title th:replace="${title}">The awesome application</title>
-		<!--Common links and scripts-->
-		<!-- CSS  -->
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">
-		<link rel="stylesheet" href="/css/me.css" type="text/css">
-		<!--引入Jquery-->
-		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
-		<script th:src="@{/layer/layer.js}" type="text/javascript"></script>
-		<!-- common.js -->
-		<script th:src="@{/js/common.js}" type="text/javascript"></script>
-
-		<!--Other links and scripts-->
-		<th:block th:replace="${links}" />
-		<th:block th:replace="${scripts}" />
-	</head>
+	<!--Common links and scripts-->
+<!--	<head th:fragment="header(title, links, scripts)">-->
+<!--		<title th:replace="${title}">The awesome application</title>-->
+<!--		&lt;!&ndash; CSS  &ndash;&gt;-->
+<!--		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+<!--		<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">-->
+<!--		<link rel="stylesheet" href="/css/me.css" type="text/css">-->
+<!--		&lt;!&ndash;引入Jquery&ndash;&gt;-->
+<!--		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>-->
+<!--		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>-->
+<!--		&lt;!&ndash;引入layer&ndash;&gt;-->
+<!--		<script th:src="@{/layer/layer.js}" type="text/javascript"></script>-->
+<!--		&lt;!&ndash; common.js &ndash;&gt;-->
+<!--		<script th:src="@{/js/common.js}" type="text/javascript"></script>-->
+<!--		&lt;!&ndash;Other links and scripts&ndash;&gt;-->
+<!--		<th:block th:replace="${links}" />-->
+<!--		<th:block th:replace="${scripts}" />-->
+<!--	</head>-->
+	<div>
+		<th:block th:fragment="header">
+			<!-- CSS  -->
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">
+			<link rel="stylesheet" href="/css/me.css" type="text/css">
+			<!--引入Jquery-->
+			<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>
+			<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>
+			<!--引入layer-->
+			<script th:src="@{/layer/layer.js}" type="text/javascript"></script>
+			<!-- common.js -->
+			<script th:src="@{/js/common.js}" type="text/javascript"></script>
+		</th:block>
+	</div>
 	<body>
 
 		<div>

@@ -1,14 +1,13 @@
 package com.course.dao;
 
 import com.course.pojo.BloodSugarRecord;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * @describe: 类描述
+ * @describe: 血糖持久层
  * @author: tyf
  * @createTime: 2022/5/14 12:21
  **/
@@ -18,11 +17,14 @@ public interface BSRDao {
     /**
      * 返回用户ID 为 userId的记录
      *
-     * @param useId 用户Id
+     * @param userId 用户Id
      * @return 结果集
      */
-    @Select("select * from blood_sugar_record where user_id = #{userId}")
-    List<BloodSugarRecord> getById(Long useId);
+
+    @Select("select record_time , value\n" +
+            "from blood_sugar_record bsr\n" +
+            "where user_id = #{userId} and to_days(now()) - to_days(record_time) <= #{days};")
+    List<BloodSugarRecord> getById(Long userId, int days);
 
 
     /**

@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common :: header(~{::title},~{}, ~{})">
+    <head>
+        <div th:replace="common::header"></div>
         <title>健康填报界面</title>
+        <script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/echarts.min.js" charset="UTF-8"></script>
     </head>
     <body>
         <div th:replace="common::root_navbar(2)"></div>
         <!--健康检测-->
-        <!--图表-->
-<!--        <div class="container" style="flex: 1 0 auto; width: 80%;height:50%">-->
-<!--            <div id="container" style="height: 100%; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" _echarts_instance_="ec_1652661154178">-->
-<!--                <div style="position: relative; width: 842px; height: 747px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">-->
-<!--                    <canvas data-zr-dom-id="zr_0" width="1350" height="1198" style="position: absolute; left: 0px; top: 0px; width: 842px; height: 747px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;">-->
-<!--                    </canvas>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+
     <!--其他-->
-    <div class="container">
+        <div class="container">
         <div class="row">
             <blockquote>今日健康概况</blockquote>
             <div class="col s4 center">
-                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
-                    <span class="valign-wrapper"><i>胰岛素含量</i></span>
-                    <span style="font-size: 60px; font-family: Consolas"><strong id="totalVotingNums">58</strong></span>
+                <div class="card-panel deep-purple lighten-1 white-text" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper"><i>今日胰岛素含量</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="todayInr">58</strong><span style="font-size: 20px;font-style: italic;">pmol/L</span></span>
                 </div>
             </div>
             <div class="col s4 center">
-                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
-                    <span class="valign-wrapper "><i>血糖含量</i></span>
-                    <span style="font-size: 60px; font-family: Consolas"><strong id="MaxVotingNums">0</strong></span>
+                <div class="card-panel  cyan lighten-1 white-text" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper "><i>今日血糖含量</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="todayBsr">0</strong><span style="font-size: 20px;font-style: italic;">mmol/L</span></span>
                 </div>
             </div>
             <div class="col s4 center">
-                <div class="card-panel lighten-2" style="background-color: rgba(255,255,255,0.3)">
-                    <span class="valign-wrapper "><i>健康评级</i></span>
-                    <span style="font-size: 60px; font-family: Consolas"><strong id="MAXVotingChannels">0</strong></span>
+                <div class="card-panel lighten-2 white-text deep-orange lighten-2" style="background-color: rgba(255,255,255,0.3)">
+                    <span class="valign-wrapper "><i>今日健康评级</i></span>
+                    <span style="font-size: 60px; font-family: Consolas"><strong id="healthyScore">B+</strong></span>
                 </div>
             </div>
         </div>
@@ -43,43 +37,59 @@
             <blockquote>血糖健康监测</blockquote>
             <div class="col s12 l8">
                 <div class="card">
-                    <div>tun1</div>
+                    <!--图表-->
+                    <div style="background-color: rgba(255,255,255,0.2)">
+                        <div id="bsrChart" style="width: 100%;height:500px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card-panel  cyan lighten-1">
+                    <span class="white-text">您知道吗？血糖（英语：Blood sugar）是指血液中的葡萄糖。消化后的葡萄糖由小肠进入血液，并被运输到机体中的各个细胞，是细胞的主要能量来源。
+                    在人体中，血糖的浓度是被严格控制的，通常维持在90毫克/分升（5mmol/L）左右。正常范围4-7 mmol/L，即血糖的恒定性。循环血液中正常的葡萄糖含量为3.3-7.05克（假设人体含血量为5升，相当于男子的平均含血量）。血糖浓度在进食一到两个小时后升高，而在睡眠结束后降到最低。
+                        如果你想监测您的血糖含量，那么请填写下列表格吧！
+                    </span>
                 </div>
             </div>
             <div class="col s12 l4">
                 <div class="card">
-
-                        <div class="input-field col s9">
+                        <div class="input-field col s8">
                             <i class="material-icons prefix">edit</i>
                             <input id="bsrValue" type="text"  class="validate" name="bloodSugar" value="">
                             <label for="bsrValue">今日血糖含量</label>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
                             <button class="btn waves-effect waves-light "  onclick="postBSR()"  style="width:100%">提交</button>
                         </div>
-                    
                 </div>
             </div>
         </div>
-        <div>
+        <div class="row">
             <blockquote>胰岛素含量监测</blockquote>
             <div class="col s12 l8">
                 <div class="card">
-                    <div>tun1</div>
+                    <!--图表-->
+                    <div style="background-color: rgba(255,255,255,0.2)">
+                        <div id="inrChart" style="width: 100%;height:500px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card-panel  deep-purple lighten-1">
+                    <span class="white-text">您知道吗？胰岛素（英语：Insulin）[2] 可以增强糖原的合成：胰岛素可以促进肝脏细胞和肌肉细胞将葡萄糖转化为糖原，胰岛素水平的降低将会导致肝脏细胞将糖原转化为葡萄糖，并释放葡萄糖到血液中。这一作用是其被用于在临床上治疗糖尿病患者的高血糖水平的原因。胰岛素亦可以增强脂肪酸的酯化作用：促进脂肪细胞将脂肪酸酯合成为脂肪。另外，正常成年人空腹基础血浆胰岛素浓度是5～20mU/L（35～145pmol/L），吃饭后1h可上升正常值的5～10倍。
+                    如果你想监测您的胰岛素含量，那么请填写下列表格吧！</span>
                 </div>
             </div>
             <div class="col s12 l4">
                 <div class="card">
-
-                        <div class="input-field col s9">
-                            <i class="material-icons prefix">edit</i>
-                            <input id="inrValue" type="text"  class="validate" name="Islet" value="" >
-                            <label for="inrValue">胰岛</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <button class="btn waves-effect waves-light"  onclick="postINR()" style="width:100%">监测胰岛</button>
-                        </div>
-
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">edit</i>
+                        <input id="inrValue" type="text"  class="validate" name="bloodSugar" value="">
+                        <label for="inrValue">今日胰岛素含量</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light "  onclick="postINR()"  style="width:100%">提交</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,44 +99,214 @@
 
     </body>
     <script type="text/javascript">
-        var dom = document.getElementById('container');
-        var myChart = echarts.init(dom, null, {
-            renderer: 'canvas',
-            useDirtyRect: false
-        });
-        var app = {};
-        var option;
+        var bsrData = null;
+        var inrData = null;
 
-        option = {
-            xAxis: {
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'line',
-                    smooth: true
+
+        /**
+         * 加载用户健康数据
+         */
+        $(function () {
+            g_showLoading("正在加载用户健康数据...")
+            $.when(
+            $.ajax({
+                url: '/bsr/result',
+                type: "GET",
+                success: function (data) {
+                    if(data.code == 0){
+                        var mpdata  = JSON.parse(data.data);
+                        bsrData = new Array();
+                        for(let k of Object.keys(mpdata)){
+                            let item = [k,mpdata[k]];
+                            bsrData.push(item);
+                        }
+                        if(bsrData.length == 0) return;
+                        bsrData.sort(function (a,b) {
+                            return a[0] > b[0] ? 1 : -1;
+                        })
+                        let lastTime = new Date(bsrData[bsrData.length-1][0]);
+                        if(datesAreOnSameDay(lastTime, new Date())){
+                            $("#todayBsr").text(bsrData[bsrData.length-1][1]);
+                        }else{
+                            $("#todayBsr").text("未填写")
+                        }
+
+                        var myChart = echarts.init(document.getElementById('bsrChart'));
+                        let option = {
+                            title: {
+                                text: '最近3天血糖数据',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: [{
+                                type: 'time',   // x轴为 时间轴
+                                splitLine: {show: true},
+                                axisLine: {
+                                    lineStyle: {width: 0}
+                                },
+                                axisLabel: {
+                                    color: '#5A6872',
+                                    fontSize: 11
+                                },
+                                axisTick: {show: true},
+                                boundaryGap: false,
+                                data: bsrData.map(function (item) {
+                                    return item[0]
+                                }),
+                                interval:1800
+                            }],
+                            yAxis: {
+                                name: "含量/mmol/L",
+                                type: 'value',
+                                boundaryGap: [0, '100%'],
+                                splitLine: {
+                                    show: true
+                                },
+                                interval:1, // 步长
+                                min:3, // 起始
+                                max:8 // 终止
+
+                            },
+                            series: [
+                                {
+                                    name: '血糖数据',
+                                    data: bsrData,
+                                    showSymbol: false,
+                                    hoverAnimation: true,
+                                    type: 'line',
+                                    smooth: true,
+                                    markPoint: {
+                                        label: {
+                                            normal: {
+                                                show: true,
+                                                backgroundColor: '#fff',
+                                                position: 'top',
+                                                color: '#41D6C3',
+                                                borderColor: 'rgba(65,214,195,0.3)',
+                                                borderWidth: 1,
+                                                padding: 8,
+                                                // formatter: `{b}: {c} ${unit}`
+                                            }
+                                        },
+                                        symbol: 'circle',
+                                        itemStyle: {
+                                            normal: {
+                                                borderColor: 'rgba(65,214,195,0.3)',
+                                                borderWidth: 15
+                                            }
+                                        },
+                                        symbolSize: 7,
+                                        data: [
+                                            { type: 'max', name: 'Max' }
+                                        ]
+                                    },
+                                }
+                            ]
+                        };
+                        layer.closeAll()
+                        myChart.setOption(option);
+                    }else{
+                        layer.msg("获取血糖含量失败");
+                        layer.closeAll()
+                    }
                 }
-            ]
-        };
+            }),
+            $.ajax( {
+                url: '/inr/result',
+                type: "GET",
+                success: function (data) {
+                    if(data.code == 0){
+                        var mpdata  = JSON.parse(data.data);
+                        inrData = new Array();
+                        for(let k of Object.keys(mpdata)){
+                            let item = [k,mpdata[k]];
+                            inrData.push(item);
+                        }
+                        if(inrData.length == 0){
+                            return;
+                        }
+                        inrData.sort(function (a,b) {
+                            return a[0] > b[0] ? 1 : -1;
+                        })
+                        let lastTime = new Date(inrData[inrData.length-1][0]);
+                        if(datesAreOnSameDay(lastTime, new Date())){
+                            $("#todayInr").text(inrData[inrData.length-1][1]);
+                        }else{
+                            $("#todayInr").text("未填写")
+                        }
+                        var myChart = echarts.init(document.getElementById('inrChart'));
+                        let option = {
+                            title: {
+                                text: '最近3天胰岛素数据',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: [{
+                                type: 'time',   // x轴为 时间轴
+                                splitLine: {show: true},
+                                axisLine: {
+                                    lineStyle: {width: 0}
+                                },
+                                axisLabel: {
+                                    color: '#5A6872',
+                                    fontSize: 11
+                                },
+                                axisTick: {show: true},
+                                boundaryGap: false,
+                                data: inrData.map(function (item) {
+                                    return item[0]
+                                }),
+                                interval:1800
+                            }],
+                            yAxis: {
+                                name: "含量/pmol/L",
+                                type: 'value',
+                                boundaryGap: [0, '100%'],
+                                splitLine: {
+                                    show: true
+                                },
+                                interval:10, // 步长
+                                min:20, // 起始
+                                max:180 // 终止
 
-        if (option && typeof option === 'object') {
-            myChart.setOption(option);
-        }
+                            },
+                            series: [
+                                {
+                                    name: '胰岛数据',
+                                    data: inrData,
+                                    showSymbol: false,
+                                    hoverAnimation: true,
+                                    type: 'line',
+                                    smooth: true,
+                                }
+                            ]
+                        };
+                        myChart.setOption(option);
+                    }else{
+                        layer.closeAll()
+                        layer.msg("获取胰岛素含量失败", {icon:2});
+                    }
+                }
+            })).done(function () {
+                layer.msg("获取数据成功！", {icon:1})
+            })
 
-        window.addEventListener('resize', myChart.resize);
+        })
 
+
+        /**
+         * 更新血糖含量
+         */
         function postBSR() {
             let formData = {
                 "value": $("#bsrValue").val(),
                 "recordTime": new Date().format("yyyy-MM-dd hh:mm:ss")
             }
             let jsonData = JSON.stringify(formData);
-            alert(jsonData)
             $.ajax({
                 url: "/bsr/update",
                 type: "POST",
@@ -135,26 +315,29 @@
                 data: jsonData,
                 success: function (data) {
                     layer.closeAll();
-                    console.log(data)
                     if (data.code == 500300) {
                         layer.msg("今日填报血糖含量成功", {icon: 1});
+                        window.location.reload()
                     } else {
-                        layer.msg(data.msg);
+                        layer.msg(data.msg, {icon:2});
                     }
                 },
                 error: function () {
+                    layer.msg(data.msg, {icon:2});
                     layer.closeAll();
                 }
             });
         }
 
+        /**
+         * 更新胰岛素含量
+         */
         function postINR() {
             let formData = {
                 "value": $("#inrValue").val(),
                 "recordTime": new Date().format("yyyy-MM-dd hh:mm:ss")
             }
             let jsonData = JSON.stringify(formData);
-            alert(jsonData)
             $.ajax({
                 url: "/inr/update",
                 type: "POST",
@@ -166,8 +349,9 @@
                     console.log(data)
                     if (data.code == 500300) {
                         layer.msg("今日填报胰岛素成功", {icon: 1});
+                        window.location.reload()
                     } else {
-                        layer.msg(data.msg);
+                        layer.msg(data.msg, {icon:2});
                     }
                 },
                 error: function () {

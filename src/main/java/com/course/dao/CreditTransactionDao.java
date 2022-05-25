@@ -1,7 +1,7 @@
 package com.course.dao;
 
 import com.course.pojo.CreditTransaction;
-import com.course.vo.CreditTransactionVO;
+import com.course.vo.CreditTransactionDTO;
 import com.course.vo.UserDTO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -128,5 +128,5 @@ public interface CreditTransactionDao {
             "from credit_transaction ct left join event e on ct.event_id  = e.id\n" +
             "where ct.user_id = #{userId} and e.type = #{type} " +
             "order by ct.create_time desc")
-    List<CreditTransactionVO> getCreditRecordByIdAndType(Long userId, Byte type);
+    List<CreditTransactionDTO> getCreditRecordByIdAndType(Long userId, Byte type);
 }

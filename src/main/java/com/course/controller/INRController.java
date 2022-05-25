@@ -1,6 +1,8 @@
 package com.course.controller;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
+import com.course.pojo.BloodSugarRecord;
 import com.course.pojo.InsulinRecord;
 import com.course.pojo.User;
 import com.course.result.CodeMsg;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,8 +36,12 @@ public class INRController {
     @GetMapping("/result")
     @NeedAuth
     public Result<String> getMonthINR(User user) {
-        List<InsulinRecord> record = inrService.getMonthRecord(user.getId());
-        String ret = JSONUtil.toJsonStr(record);
+        List<InsulinRecord> records = inrService.getMonthRecord(user.getId());
+        HashMap<String, BigDecimal> mp = new HashMap<>();
+        for(InsulinRecord record: records){
+            mp.put(DateUtil.format(record.getRecordTime(),"yyyy-MM-dd HH:mm:ss"), record.getValue());
+        }
+        String ret = JSONUtil.toJsonStr(mp);
         return Result.success(ret);
     }
 

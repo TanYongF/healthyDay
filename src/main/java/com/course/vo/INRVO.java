@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,10 +24,13 @@ public class INRVO {
 
     private Long userId;
 
-    @Digits(integer = 1, fraction = 2)
+    @Digits(integer = 3, fraction = 4)
+    @Max(150)
+    @Min(20)
     private BigDecimal value;
 
     @Past
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime recordTime;
 

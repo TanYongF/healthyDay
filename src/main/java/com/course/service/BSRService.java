@@ -20,7 +20,8 @@ public class BSRService {
     BSRDao bsrDao;
 
     public List<BloodSugarRecord> getMonthRecord(Long id) {
-        return bsrDao.getById(id);
+        List<BloodSugarRecord> records = bsrDao.getById(id, 3);
+        return records;
     }
 
     public void updateBSValue(BSRVO bsrVo) {
