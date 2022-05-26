@@ -120,7 +120,10 @@
                             let item = [k,mpdata[k]];
                             bsrData.push(item);
                         }
-                        if(bsrData.length == 0) return;
+                        if(bsrData.length == 0){
+                            $("#todayBsr").text("未填写")
+                            return;
+                        }
                         bsrData.sort(function (a,b) {
                             return a[0] > b[0] ? 1 : -1;
                         })
@@ -130,7 +133,6 @@
                         }else{
                             $("#todayBsr").text("未填写")
                         }
-
                         var myChart = echarts.init(document.getElementById('bsrChart'));
                         let option = {
                             title: {
@@ -225,6 +227,7 @@
                             inrData.push(item);
                         }
                         if(inrData.length == 0){
+                            $("#todayInr").text("未填写")
                             return;
                         }
                         inrData.sort(function (a,b) {

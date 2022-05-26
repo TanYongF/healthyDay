@@ -9,15 +9,17 @@
 		<!--登陆后到这里-->
 		<div th:replace="common::root_navbar(0)"></div>
 		<div class="row" style="width: 90%">
-			<!--个人信息开始-->
+
+			<!--个人基本信息开始-->
 			<div class="col s12 m4">
 				<blockquote style="border-color: green">个人积分概况</blockquote>
 				<div class="card horizontal" style="">
 					<div class="container">
 						<div class="row">
 							<div class="col s12 center" style="margin-top: 30px">
-								<img id="head" src="https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300" style="width:50%" class="circle responsive-img">
+								<img id="head" src="https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300" style="width:50%" class="circle responsive-img ">
 							</div>
+							<div class="center-align"><span><a href="#modal1" class="modal-trigger">修改头像</a></span></div>
 						</div>
 						<br>
 						<div class="row">
@@ -27,29 +29,26 @@
 										<div class="row">
 											<div class="input-field col s12">
 												<i class="material-icons prefix">account_circle</i>
-												<label for="nicknameEdit">你的昵称</label>
+												<label for="nicknameEdit">我的昵称</label>
 												<input type="text" class="form-control validate" id="nicknameEdit">
 											</div>
 											<div class="input-field col s12">
 												<i class="material-icons prefix">face</i>
-
 												<select id="genderEdit">
-<!--													<option value="" disabled selected>Choose your option</option>-->
 													<option value="1">男</option>
 													<option value="0">女</option>
-<!--													<option value="3">Option 3</option>-->
 												</select>
-												<label>你的性别</label>
+												<label>我的性别</label>
 <!--												<input type="text" class="form-control validate" id="genderEdit">-->
 											</div>
 											<div class="input-field col s12">
 												<i class="material-icons prefix">comment</i>
-												<label for="infoEdit">你的个人信息</label>
+												<label for="infoEdit">我的个人信息</label>
 												<input type="text" class="form-control validate" id="infoEdit">
 											</div>
 											<div class="input-field col s12">
 												<i class="material-icons prefix">email</i>
-												<label for="emailEdit">你的邮箱</label>
+												<label for="emailEdit">我的邮箱</label>
 												<input type="text" class="form-control validate" id="emailEdit">
 											</div>
 										</div>
@@ -85,6 +84,7 @@
 				</div>
 			</div>
 			<!--个人信息结束-->
+
 			<!--图表开始-->
 			<div class="col s12 m8">
 				<!--今日概况开始-->
@@ -110,7 +110,6 @@
 					</div>
 				</div>
 				<!--今日概况结束-->
-
 				<!--基础积分开始-->
 				<div class="row">
 					<div class="card">
@@ -148,12 +147,35 @@
 			<!--图表结束-->
 		</div>
 
+		<!--头像修改开始-->
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>头像修改</h4>
+				<form>
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>选择文件</span>
+							<input type="file" multiple>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" id="headEdit">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a onclick="updateHead()" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
+		</div>
+		<!--头像修改结束-->
+
 		<div th:replace="common::footer"></div>
 	</body>
 	<script>
 
         /**
-         * 加载用户信息函数
+         * 加载总用户页面函数
          */
         $(function () {
             g_showLoading("加载个人信息中...");
@@ -222,7 +244,7 @@
 		}
 
         /**
-         * 加载用户信息
+         * 回填用户信息
          */
         function loadUserInfo(){
             $.ajax({
@@ -233,14 +255,14 @@
                     if (data.code == 0) {
                         let user = data.data
                         $("#nicknameEdit").val(user.details.nickname);
-                        // $("#genderEdit").val(user.details.gender+"");
                         var count=$("#genderEdit  option").length;
                         for(var i=0;i<count;i++) {
-                            if($("#genderEdit").get(0).options[i].text == "女") {
+                            if($("#genderEdit").get(0).options[i].value == user.details.gender) {
                                 $("#genderEdit").get(0).options[i].selected = true;
                                 break;
                             }
                         }
+                        $('select').formSelect();
                         if(user.details.head == null){
                             $("#head").attr("src", "https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300")
                         }else{
@@ -265,6 +287,9 @@
             });
         }
 
+        /**
+         * 更新用户信息
+         */
         function updateInfo(){
             let formUserInfoData = {
                 nickname: $("#nicknameEdit").val(),
@@ -293,6 +318,10 @@
                 }
             });
         }
+
+        /**
+         * 更新用户并发症
+         */
         function updateComplication(){
             let formUserInfoData = {
                 complication : $("#complicationEdit").val()
@@ -305,7 +334,7 @@
                 contentType: "application/json",
                 data: jsonUserInfo,
                 success: function (data) {
-                    console.log(data)
+                    // console.log(data)
                     if (data.code == 0) {
                         layer.msg("更新个人并发症成功", {icon: 1});
                     } else {
@@ -318,9 +347,21 @@
             });
         }
 
+        /**
+         * 更新用户头像
+         */
+        function updateHead() {
+            let headFile = $("#headEdit").files[0];
+            console.log(headFile)
+            let reader = new FileReader();
+            reader.readAsDataURL(headFile);
+            reader.addEventListener('load', function() {
+                // 读取完成
+                let res = reader.result
+	            console.log(res)
+                // res是base64格式的图片
+            })
 
-
-
-
+        }
 	</script>
 </html>

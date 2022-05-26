@@ -59,7 +59,7 @@ function logout() {
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('.modal').modal();
-    $('select').formSelect();
+    $('.materialboxed').materialbox();
 });
 
 

@@ -96,7 +96,7 @@
 	        var spanD = document.createElement("span")
             var e_8 = document.createElement("a");
             //a标签
-            e_8.setAttribute("href", "#");
+            // e_8.setAttribute("href", "#");
             e_8.setAttribute("onclick", "join(" + activity.id + ")");
             e_8.innerText = "联系参加！"
 	        spanD.innerHTML = info
@@ -115,7 +115,8 @@
                 type: "POST",
                 success: function (result) {
                     layer.closeAll()
-                    if (result.code == 200) {
+	                console.log(result)
+                    if (result.code == 0) {
                         layer.msg("参加活动成功!我们的工作人员会24小时之内联系您！如有疑问请拨打：010-32131", {icon:1});
                     } else {
                         layer.msg(result.msg, {icon:2});

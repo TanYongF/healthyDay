@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -27,9 +24,11 @@ public class BSRVO {
     @Digits(integer = 1, fraction = 4)
     @Max(8)
     @Min(3)
+    @NotNull
     private BigDecimal value;
 
     @Past
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime recordTime;
 

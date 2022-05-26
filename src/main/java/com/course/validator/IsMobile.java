@@ -10,7 +10,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @Describe: 类描述
+ * @Describe: 手机号码验证JSR
  * @Author: tyf
  * @CreateTime: 2022/4/16
  **/
