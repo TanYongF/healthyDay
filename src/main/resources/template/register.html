@@ -124,6 +124,7 @@
 	                        layer.msg("正在跳转到登陆界面")
                             window.location.replace("/login/do_login");
                         }else{
+                            layer.closeAll()
                             M.toast({
                                 html : res.msg,
                                 classes : "red rounded"
