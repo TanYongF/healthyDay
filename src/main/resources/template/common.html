@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-	<!--Common links and scripts-->
-<!--	<head th:fragment="header(title, links, scripts)">-->
-<!--		<title th:replace="${title}">The awesome application</title>-->
-<!--		&lt;!&ndash; CSS  &ndash;&gt;-->
-<!--		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-<!--		<link rel="stylesheet" href="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/css/materialize.min.css" type="text/css">-->
-<!--		<link rel="stylesheet" href="/css/me.css" type="text/css">-->
-<!--		&lt;!&ndash;引入Jquery&ndash;&gt;-->
-<!--		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/jquery.js" charset="UTF-8"></script>-->
-<!--		<script type="text/javascript" src="https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/VotingSystem/js/materialize.min.js" charset="UTF-8"></script>-->
-<!--		&lt;!&ndash;引入layer&ndash;&gt;-->
-<!--		<script th:src="@{/layer/layer.js}" type="text/javascript"></script>-->
-<!--		&lt;!&ndash; common.js &ndash;&gt;-->
-<!--		<script th:src="@{/js/common.js}" type="text/javascript"></script>-->
-<!--		&lt;!&ndash;Other links and scripts&ndash;&gt;-->
-<!--		<th:block th:replace="${links}" />-->
-<!--		<th:block th:replace="${scripts}" />-->
-<!--	</head>-->
 	<div>
 		<th:block th:fragment="header">
 			<!-- CSS  -->
@@ -35,7 +17,6 @@
 		</th:block>
 	</div>
 	<body>
-
 		<div>
 			<nav class="theme-color"  role="navigation" th:fragment="navbar(n)">
 				<div class="nav-wrapper container">
@@ -59,7 +40,7 @@
 					<ul class="right hide-on-med-and-down">
 						<li th:classappend="${n == 0} ? 'active'"><a th:href="@{/index}" class="active">首页</a></li>
 						<li th:classappend="${n == 1} ? 'active'"><a th:href="@{/activities}">所有活动</a></li>
-						<li th:classappend="${n == 2} ? 'active'"><a th:href="@{/health}">健康填报</a></li>
+						<li th:classappend="${n == 2} ? 'active'"><a th:href="@{/health}">健康评估</a></li>
 						<li th:classappend="${n == 3} ? 'active'"><a  th:onclick="logout()">登出</a></li>
 					</ul>
 				</div>

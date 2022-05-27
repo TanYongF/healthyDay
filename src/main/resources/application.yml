@@ -9,7 +9,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://81.68.239.206:3306/pointssystem?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&autoReconnect=true&&enabledTLSProtocols=TLSv1.2
+    url: jdbc:mysql://localhost:3306/pointssystem?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&autoReconnect=true&&enabledTLSProtocols=TLSv1.2
     username: pointSystem
     password: 123456
     druid:
@@ -17,7 +17,7 @@ spring:
       max-active: 1000
       initial-size: 5
   redis:
-    host: 81.68.239.206
+    host: localhost
     port: 6379
     timeout: 10
     password: tanyongfeng13666
