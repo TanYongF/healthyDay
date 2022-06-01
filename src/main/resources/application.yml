@@ -4,7 +4,7 @@ server:
 spring:
   thymeleaf:
     prefix: classpath:/template/
-    cache: false
+    cache: true
 
 
   datasource:

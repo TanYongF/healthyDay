@@ -9,6 +9,7 @@
 - 本项目成员包括 ： 张雨桐、王雪臣、[谭永锋](https://tans.fun)
 - **项目地址** ： [积分系统项目地址](http://win.pmease.cn/projects/coursedesign-B19040229)
 - **部署网站**： https://points.tans.fun
+- 项目难点与解决思路：[南邮课程设计积分系统](https://tans.fun/archives/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E7%A7%AF%E5%88%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8)
 
 ## 一、需求分析
 

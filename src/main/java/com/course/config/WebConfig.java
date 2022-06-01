@@ -39,6 +39,10 @@ public class WebConfig implements WebMvcConfigurer {
         argumentResolvers.add(userArgumentResolver);
     }
 
+    /**
+     * 获取所有需要积分逻辑的URL
+     * @param iUserTaskStrategies
+     */
     @Autowired
     public void setUriList(List<IUserTaskStrategy> iUserTaskStrategies){
         iUserTaskStrategies.forEach(iUserTaskStrategy -> {
@@ -50,7 +54,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //注册相应的鉴权策略拦截器
         registry.addInterceptor(authInterceptor).addPathPatterns("/bsr/**", "/inr/**", "/u/**", "/index", "/act/**");
+        //注册相应的积分策略拦截器
         registry.addInterceptor(userTaskInterceptor).addPathPatterns(uriList).excludePathPatterns("/login/**");
     }
 }

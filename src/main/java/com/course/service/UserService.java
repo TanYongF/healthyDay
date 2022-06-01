@@ -137,6 +137,7 @@ public class UserService {
     public boolean register(String name, String formPassword) {
         String uuid = UUIDUtil.uuid();
         uuid = uuid.substring(0, 6);
+        //表单MD5加密
         String dbPass = MD5Util.formPassToDbPass(formPassword,uuid);
         User user = userDao.getById(Long.parseLong(name));
         if(user != null){

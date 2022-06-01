@@ -52,9 +52,9 @@ public class UserTaskInterceptor implements HandlerInterceptor{
         String uri = request.getRequestURI();
         String token = RequestUtil.getTokenByRequest(request);
         User user = userService.getByToken(response, token);
-        //每日登陆过滤器
+        //每个接口都可以使用每日登陆积分策略拦截器
         loginUserTaskStrategy.finishedUserIntegralTask(user, token, request);
-
+        //获取对应的积分策略拦截器
         IUserTaskStrategy userStrategy = userTaskStrategyMap.get(uri);
         //其他接口过滤器
         if (userStrategy != null) {
