@@ -1,3 +1,20 @@
+# 使用
+
+1. 安装Mysql、Redis
+
+2. 创建数据库，执行ddl.sql文件生成数据库
+
+3. 复制 `application-demo.yml`， 修改其中mysql连接配置和Redis配置后上传至服务器任意目录下
+
+4. 在`applicationf-demo.yml`目录下执行命令：
+
+   ```shell
+   # 如下列命令测试可以正常运行，那么在后面加上参数 -d 即可后台运行
+   docker run --name healthy --network host registry.cn-shanghai.aliyuncs.com/sleepytans/webapp:1.0 
+   ```
+
+5. 访问 `http://ip:8093`即可访问网站
+
 # 健康积分管理系统
 
 互联网平台积分体系是一个独立、完整的系统模块，主要用于激励和回馈用户在平台的消费行为和活动行为，通过积分体系可以激发与引导用户在平台的活跃行为，逐步形成用户对平台的依赖性和习惯性，提升用户对平台的黏度和使用率。
