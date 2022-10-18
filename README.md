@@ -1,4 +1,4 @@
-**1、确保安装了[jdk1.7或者更高](https://www.oracle.com/technetwork/java/javase/downloads/index.html)**
+**1、确保安装了[jdk18或者更高](https://www.oracle.com/technetwork/java/javase/downloads/index.html)**
 
 **2、安装Postman 官网地址：https://www.getpostman.com/downloads/下载安装即可**
 
