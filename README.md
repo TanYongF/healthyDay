@@ -1,12 +1,8 @@
 **1、确保安装了[jdk1.7或者更高](https://www.oracle.com/technetwork/java/javase/downloads/index.html)**
 
-**2、安装Postman
-官网地址：https://www.getpostman.com/downloads/下载安装即可
-**
+**2、安装Postman 官网地址：https://www.getpostman.com/downloads/下载安装即可**
 
-**3、IDEA安装
-官网地址：https://www.jetbrains.com/idea/
-**
+**3、IDEA安装 官网地址：https://www.jetbrains.com/idea/**
 
 **4、将本项目克隆到本地目录中：**
 
