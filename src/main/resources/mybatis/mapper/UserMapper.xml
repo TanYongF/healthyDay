@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.coursedesign2022.mapper.UserMapper">
+    <select id="getPointObject" resultType="com.course.coursedesign2022.pojo.PointObject">
+        select * from User
+    </select>
+    <select id="getPointObjectByID" parameterType="int" resultType="com.course.coursedesign2022.pojo.PointObject">
+        select *from User where id = #{id}
+    </select>
+    <!--对象中的属性可以直接取出-->
+    <insert id="addPointObject" parameterType="com.course.coursedesign2022.pojo.PointObject">
+        insert into User(id, growScore, exchangeScore, scoreTotal) values (#{id},#{growScore},#{exchangeScore},#{scoreTotal});
+    </insert>
+    <update id="updatePointObject" parameterType="com.course.coursedesign2022.pojo.PointObject">
+        update User
+        set id=#{id},growScore=#{growScore},exchangeScore=#{exchangeScore},scoreTotal=#{scoreTotal}
+        where id=#{id}
+    </update>
+    <delete id="deletePointObject" parameterType="int">
+        delete from User where id=#{id}
+    </delete>
+</mapper>
