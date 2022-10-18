@@ -13,7 +13,7 @@
         </commentGenerator>
 
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="org.sqlite.JDBC" connectionURL="jdbc:sqlite:D:/courseProjects/courseDesign2022/courseDesign2022/src/main/resources/db/blood.db">
+        <jdbcConnection driverClass="org.sqlite.JDBC" connectionURL="jdbc:sqlite:src/main/resources/db/blood.db">
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
