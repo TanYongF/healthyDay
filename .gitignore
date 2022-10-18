@@ -2,7 +2,7 @@
 score
 
 #过滤sqlite数据库文件 
-
+*db
 #过滤文件夹target,.idea
 /target
 /.idea
