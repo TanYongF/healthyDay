@@ -4,8 +4,6 @@ import com.course.pojo.Event;
 import com.course.pojo.User;
 import com.course.redis.RedisService;
 import com.course.redis.UserKey;
-import com.course.service.CreditTransactionService;
-import com.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

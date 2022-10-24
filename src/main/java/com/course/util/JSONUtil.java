@@ -1,7 +1,5 @@
 package com.course.util;
 
-import com.alibaba.fastjson.JSON;
-
 /**
  * @Describe: Json转换工具类
  * @Author: tyf

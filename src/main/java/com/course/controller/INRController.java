@@ -2,7 +2,6 @@ package com.course.controller;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
-import com.course.pojo.BloodSugarRecord;
 import com.course.pojo.InsulinRecord;
 import com.course.pojo.User;
 import com.course.result.CodeMsg;

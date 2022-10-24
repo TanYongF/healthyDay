@@ -1,10 +1,11 @@
 package com.course.dao;
 
 import com.course.pojo.BloodSugarRecord;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @describe: 血糖持久层
@@ -16,7 +17,6 @@ public interface BSRDao {
 
     /**
      * 返回用户ID 为 userId的记录
-     *
      * @param userId 用户Id
      * @return 结果集
      */

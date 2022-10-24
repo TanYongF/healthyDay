@@ -40,10 +40,9 @@ public interface CreditTransactionDao {
 
 
     /**
-     * 根据用户ID来获取用户的三种积分；
-     *
+     * 根据用户ID来获取用户的三种积分: 可兑换积分、成长积分、已失效积分
      * @param userId 用户id
-     * @return
+     * @return UserDTO
      */
     @Select("select \n" +
             "ifnull(sum(case temp.type when '0' then temp.points else 0 end),0) as `grow_score`,\n" +
@@ -78,6 +77,7 @@ public interface CreditTransactionDao {
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "expiredTime", column = "expired_time")
     })
+
     @Select(value = "select * from credit_transaction where "
             + " id=#{id} or "
             + " user_id=#{userId} or "
@@ -88,7 +88,7 @@ public interface CreditTransactionDao {
     List<CreditTransaction> selectList(CreditTransaction creditTransaction);
 
     /**
-     * 判断该积记录是否满足条件
+     * 判断该次活动是否满足添加f条件
      * @param creditRecord 待验证积分记录
      */
     @Select("select\n" +
@@ -110,10 +110,10 @@ public interface CreditTransactionDao {
 
 
     /**
-     * 根据用户
-     * @param user
-     * @param eventId
-     * @return
+     * 联合查询 ：用户ID、 事件ID
+     * @param userId 用户ID
+     * @param eventId 事件ID
+     * @return 加分记录
      */
     @Select("select * from credit_transaction ct where user_id = #{userId} and event_id = #{eventId}")
     List<CreditTransaction> getByIdAndEventId(@Param("userId")Long userId, @Param("eventId") Long eventId);
@@ -122,7 +122,8 @@ public interface CreditTransactionDao {
     /**
      * 根据类型获取用户可兑换积分
      * @param userId 用户ID
-     * @param type
+     * @param type 积分类型 0:成长积分 1:可兑换积分
+     * @return 积分记录
      */
     @Select("select * \n" +
             "from credit_transaction ct left join event e on ct.event_id  = e.id\n" +

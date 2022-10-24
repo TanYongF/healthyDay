@@ -1,9 +1,7 @@
 package com.course.vo;
 
-import com.course.validator.IsMobile;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.validation.constraints.NotBlank;
 
 /**
  * @describe: 用户个人信息实体

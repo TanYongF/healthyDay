@@ -1,6 +1,5 @@
 package com.course.validator;
 
-import javax.validation.Constraint;
 import java.lang.annotation.*;
 
 /**

@@ -4,7 +4,6 @@ import com.course.validator.IsMobile;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 /**

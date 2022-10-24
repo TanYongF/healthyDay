@@ -1,9 +1,6 @@
 package com.course.interceptor.strategy;
 
 import com.course.pojo.Event;
-import com.course.service.CreditTransactionService;
-import com.course.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
