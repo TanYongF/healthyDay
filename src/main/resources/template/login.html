@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<div th:replace="common::header"></div>
+		<title>系统登陆</title>
+		<!-- jquery-validator -->
+		<script th:src="@{/jquery-validation/jquery.validate.min.js}" type="text/javascript"></script>
+		<script th:src="@{/jquery-validation/localization/messages_zh.min.js}" type="text/javascript"></script>
+		<!-- md5.js -->
+		<script th:src="@{/js/md5.min.js}" type="text/javascript"></script>
+	</head>
+	<body>
+		<div th:replace="common :: navbar(1)"></div>
+		<div class="container login-container" style="flex: 1 0 auto; width: 90%">
+			<!--开始-->
+			<div class="row section ">
+				<div class="col s12 l12">
+					<div class="card horizontal large" style="   height: 600px; background-color: rgba(255,255,255,0.5)" >
+						<div class="card-image">
+							<img width="600" height="500" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/seed/600/500?blur=5" class="responsive-img wp-post-image" loading="lazy" sizes="(max-width: 305px) 100vw, 305px">
+							<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
+                                <span class="font-sans" style="font-size: 64px;line-height: 220px;">健康积分系统
+                                    <br>Points System
+                                </span>
+                            </span>
+						</div>
+						<div class="card-stacked">
+							<div class="card-content center">
+								<div class="section">
+									<div class="col s12 l12">
+										<div class="row section">
+											<h3 class="title left-align " style="font-weight: 900"><span class="red-text">·&nbsp;</span>手机号登录</h3>
+										</div>
+										<form method="post" id="login-form" class="horizontal section">
+											<div class="row">
+												<div class="input-field col s12 inline">
+													<i class="material-icons prefix">local_phone</i>
+													<input class="form-control validate" id="mobile" maxlength="11" minlength="11"  data-length="11"
+													       name="mobile"
+													        required="true" type="text"/>
+													<label for="mobile">手机号码</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix">vpn_key</i>
+													<input class="form-control validate" id="password" type="password"  name="password" minlength="6" maxlength="20" value=""  data-length="20">
+													<label for="password">密码</label>
+												</div>
+											</div>
+											<div class="section row">
+												<div class="center">
+													<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
+													<button class="btn-large waves-effect green pulse" type="button" name="login"  id="login" onclick="doLogin()">登录
+													</button>
+												</div>
+											</div>
+											<div class="row">
+												<div class="center">
+													<a href="/login/do_register">没有账号？去注册</a>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--结束-->
+		</div>
+		<footer th:replace="common::footer"></footer>
+	</body>
+	<script>
+        $(document).ready(function() {
+            $('input#mobile, textarea#password').characterCounter();
+        });
+        function login() {
+            $("#login-form").validate({
+                submitHandler: function (form) {
+                    doLogin();
+                }
+            });
+        }
+
+        //用户登陆按钮事件
+        function doLogin() {
+            g_showLoading("登陆中...");
+            var inputPass = $("#password").val();
+            //前端密码信息做MD5处理
+            var salt = g_passsword_salt;
+            var str = "" + salt.charAt(0) + salt.charAt(2) + inputPass + salt.charAt(5) + salt.charAt(4);
+            var password = md5(str);
+
+            $.ajax({
+                url: "/login/do_login",
+                type: "POST",
+                data: {
+                    mobile: $("#mobile").val(),
+                    password: password
+                },
+                success: function (data) {
+                    layer.closeAll();
+                    if (data.code == 0) {
+                        layer.msg("成功", {icon: 1});
+
+                        window.location.href = "/index";
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+	</script>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="common::header"></div>
+		<title>活动界面</title>
+	</head>
+	<body>
+		<!--navbar-->
+		<div th:replace="common::root_navbar(1)"></div>
+		<div class="container">
+			<div class="section">
+				<div class="col s12">
+					<blockquote class="title" style="border-color: red" >
+						全部活动
+					</blockquote>
+				</div>
+				<div class="row" id="activities">
+				</div>
+			</div>
+		</div>
+		<div th:replace="common::footer"></div>
+	</body>
+	<script>
+        $(function () {
+            g_showLoading("加载活动的信息中...");
+
+            $.ajax({
+                url: "/act",
+                type: "GET",
+                success: function (result) {
+                    layer.closeAll()
+                    if (result.code == 0) {
+                        render(result.data)
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        })
+        /*渲染页面*/
+        function render(data) {
+	        for(const activity of data){
+                $("#activities").append(createCard(activity))
+	        }
+        }
+
+        /**
+         * 创建卡片
+         * @param activity
+         * @returns {HTMLDivElement}
+         */
+        function createCard(activity) {
+            var e_0 = document.createElement("div");
+            e_0.setAttribute("class", "col s12 m12 l6");
+            var e_1 = document.createElement("div");
+            e_1.setAttribute("class", "card");
+            var e_2 = document.createElement("div");
+            e_2.setAttribute("class", "card-image waves-effect waves-block waves-light");
+            var e_3 = document.createElement("img");
+            e_3.setAttribute("class", "activator");
+            e_3.setAttribute("src", activity.pagePhoto);
+            e_2.appendChild(e_3);
+            e_1.appendChild(e_2);
+            var e_4 = document.createElement("div");
+            e_4.setAttribute("class", "card-content");
+            var e_5 = document.createElement("span");
+            e_5.setAttribute("class", "card-title activator grey-text text-darken-4");
+            e_5.appendChild(document.createTextNode(activity.info));
+            var e_6 = document.createElement("i");
+            e_6.setAttribute("class", "material-icons right");
+            e_6.appendChild(document.createTextNode("more_vert"));
+            e_5.appendChild(e_6);
+            e_4.appendChild(e_5);
+            var e_7 = document.createElement("p");
+
+            // e_7.appendChild(e_8);
+            e_7.appendChild(document.createTextNode("点击页面了解更多或参与活动"))
+            e_4.appendChild(e_7);
+            e_1.appendChild(e_4);
+            var e_9 = document.createElement("div");
+            e_9.setAttribute("class", "card-reveal");
+            var e_10 = document.createElement("span");
+            e_10.setAttribute("class", "card-title grey-text text-darken-4");
+            e_10.appendChild(document.createTextNode(activity.info));
+            var e_11 = document.createElement("i");
+            e_11.setAttribute("class", "material-icons right");
+            e_11.appendChild(document.createTextNode("close"));
+            e_10.appendChild(e_11);
+            e_9.appendChild(e_10);
+            var e_12 = document.createElement("p");
+            let info = `活动地点： ${activity.address} <br/> 时间: ${activity.deadDate} <br/>  举办方：${activity.organiser} <br/>`
+	        var spanD = document.createElement("span")
+            var e_8 = document.createElement("a");
+            //a标签
+            // e_8.setAttribute("href", "#");
+            e_8.setAttribute("onclick", "join(" + activity.id + ")");
+            e_8.innerText = "联系参加！"
+	        spanD.innerHTML = info
+            e_12.appendChild(spanD);
+            e_12.appendChild(e_8);
+
+            e_9.appendChild(e_12);
+            e_1.appendChild(e_9);
+            e_0.appendChild(e_1);
+            return e_0;
+        }
+        function join(activityId){
+            g_showLoading("正在尝试参加活动....")
+            $.ajax({
+                url: "/act/join?activityId=" + activityId,
+                type: "POST",
+                success: function (result) {
+                    layer.closeAll()
+	                console.log(result)
+                    if (result.code == 0) {
+                        layer.msg("参加活动成功!我们的工作人员会24小时之内联系您！如有疑问请拨打：010-32131", {icon:1});
+                    } else {
+                        layer.msg(result.msg, {icon:2});
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+	</script>
+</html>

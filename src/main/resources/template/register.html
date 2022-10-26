@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<div th:replace="common::header"></div>
+		<title>注册界面</title>
+		<!-- jquery-validator -->
+		<script th:src="@{/jquery-validation/jquery.validate.min.js}" type="text/javascript"></script>
+		<script th:src="@{/jquery-validation/localization/messages_zh.min.js}" type="text/javascript"></script>
+		<!-- md5.js -->
+		<script th:src="@{/js/md5.min.js}" type="text/javascript"></script>
+	</head>
+	<body class="bg">
+		<!--nav开始-->
+		<div th:replace="common :: navbar(2)"></div>
+		<!--nav结束-->
+		<div class="container">
+			<!--主体开始-->
+			<div class="container login-container" style="flex: 1 0 auto; width: 90%">
+				<!--开始-->
+				<div class="row section">
+					<div class="col s12 l12">
+						<div class="card " style="background-color: rgba(255,255,255,0.8)" >
+							<div class="card-image">
+								<img height="300px" width="1500px" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/seed/picsum/325/200?blur=4"  loading="lazy" >
+								<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
+                                    <span style="font-size: 64px;line-height: 240px;">
+                                        积分系统注册
+                                    </span>
+                            </span>
+							</div>
+							<div class="card-content" >
+								<form id="register-form" class="horizontal section">
+									<div class="row">
+										<div class="input-field col s12">
+											<i class="material-icons prefix">perm_identity</i>
+											<input class="validate" id="mobile" maxlength="11" minlength="11" name="mobile"
+											       required="true" type="text" autocomplete="off"/>
+											<label for="mobile">手机号</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s12">
+											<i class="material-icons prefix">vpn_key</i>
+											<input class="validate form-control" id="password" maxlength="16" minlength="6" name="password"
+											       required="true" type="password"/>
+											<label for="password">密码</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s12">
+											<i class="material-icons prefix">vpn_key</i>
+											<input class="validate form-control" id="confirm_password" maxlength="16" minlength="6" name="confirm_password"
+											       required="true" type="password"/>
+											<label for="confirm_password">确认密码</label>
+										</div>
+									</div>
+									<div class="section row">
+										<div class="center">
+											<input name="_csrf" type="hidden" value="93edbebc-aa90-4b8c-b372-28f922a9a9e6"/>
+											<button class="btn-large waves-effect waves-light pulse" type="button" name="action"  id="register">注册
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--结束-->
+			</div>
+		</div>
+		<!--左下角返回按钮-->
+		<div class="fixed-action-btn" style="right: 0; left: 40px">
+			<a class="btn-floating btn-large blue lighten-1" href="/login/do_login">
+				<i class="large material-icons">arrow_back</i>
+			</a>
+		</div>
+		<footer th:replace="common::footer"></footer>
+		<script color="0,0,0" opacity="0.5" count="99" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script>
+        M.AutoInit();
+        $("#register").click(function () {
+            doRegister();
+        })
+
+        //注册按钮
+        function doRegister(){
+            g_showLoading();
+            let password = $("#password").val();
+            let confirm = $("#confirm_password").val();
+            let username = $("#mobile").val();
+            if(!(password.length && confirm.length && username.length)){
+	            M.toast({
+	                html : "请填写完整！",
+	                classes : "rounded red"
+	            })
+            }else if(password != confirm) {
+                M.toast({
+                    html: "两次密码不一致！",
+                    classes: "rounded red"
+                })
+            }else{
+                let salt = g_passsword_salt;
+                let str = "" + salt.charAt(0) + salt.charAt(2) + password + salt.charAt(5) + salt.charAt(4);
+                password = md5(str);
+                $.ajax({
+                    url: '/login/do_register',
+                    type: 'post',
+                    data: {
+                        mobile: $("#mobile").val(),
+                        password: password
+                    },
+                    success : function (res) {
+                        layer.closeAll();
+                        if(res.code === 200001){
+                            M.toast({
+                                html : res.msg,
+                                classes : "green rounded",
+                                outDuration:"1000"
+                            })
+	                        layer.msg("正在跳转到登陆界面")
+                            window.location.replace("/login/do_login");
+                        }else{
+                            layer.closeAll()
+                            M.toast({
+                                html : res.msg,
+                                classes : "red rounded"
+                            })
+                        }
+
+                    },
+                    error : function (res){
+                        layer.closeAll();
+                    }
+                }).done(function (data){
+                    console.log(data.code);
+                })
+	            layer.closeAll()
+            }
+        }
+	</script>
+</html>

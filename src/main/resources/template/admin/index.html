@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="common::header"></div>
+		<title>个人资料</title>
+	</head>
+	<body>
+		<!--登陆后到这里-->
+		<div th:replace="common::root_navbar(0)"></div>
+		<div class="row" style="width: 90%">
+
+			<!--个人基本信息开始-->
+			<div class="col s12 m4">
+				<blockquote style="border-color: green">个人积分概况</blockquote>
+				<div class="card horizontal" style="">
+					<div class="container">
+						<div class="row">
+							<div class="col s12 center" style="margin-top: 30px">
+								<img id="head" src="https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300" style="width:50%" class="circle responsive-img ">
+							</div>
+							<div class="center-align"><span><a href="#modal1" class="modal-trigger">修改头像</a></span></div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col s12">
+								<form>
+									<div class="form-group">
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix">account_circle</i>
+												<label for="nicknameEdit">我的昵称</label>
+												<input type="text" class="form-control validate" id="nicknameEdit">
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">face</i>
+												<select id="genderEdit">
+													<option value="1">男</option>
+													<option value="0">女</option>
+												</select>
+												<label>我的性别</label>
+<!--												<input type="text" class="form-control validate" id="genderEdit">-->
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">comment</i>
+												<label for="infoEdit">我的个人信息</label>
+												<input type="text" class="form-control validate" id="infoEdit">
+											</div>
+											<div class="input-field col s12">
+												<i class="material-icons prefix">email</i>
+												<label for="emailEdit">我的邮箱</label>
+												<input type="text" class="form-control validate" id="emailEdit">
+											</div>
+										</div>
+									</div>
+									<div class="center">
+										<a class="btn-floating btn-large waves-effect waves-light theme-color" onclick="updateInfo()"><i class="material-icons">send</i></a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<blockquote style="border-color: green">其他情况</blockquote>
+				<div class="card-panel horizontal" style="">
+
+					<div>
+						<h5 class="center-align" style="font-size: 20px">如果您有并发症状，请填写以下内容</h5>
+					</div>
+
+					<form>
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">favorite_border
+								</i>
+								<textarea id="complicationEdit" class="materialize-textarea" data-length="120"></textarea>
+								<label for="complicationEdit">并发症</label>
+							</div>
+						</div>
+					</form>
+					<div class="center">
+						<a class="btn-floating btn-large waves-effect waves-light green" onclick="updateComplication()"><i class="material-icons">send</i></a>
+					</div>
+				</div>
+			</div>
+			<!--个人信息结束-->
+
+			<!--图表开始-->
+			<div class="col s12 m8">
+				<!--今日概况开始-->
+				<div class="row">
+					<blockquote>今日概况</blockquote>
+					<div class="col s4 center">
+						<div class="card-panel blue lighten-2 white-text">
+							<span class="valign-wrapper"><i>总积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="totalPoints">58</strong></span>
+						</div>
+					</div>
+					<div class="col s4 center">
+						<div class="card-panel green lighten-2 white-text">
+							<span class="valign-wrapper "><i>基础积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="growScore">0</strong></span>
+						</div>
+					</div>
+					<div class="col s4 center">
+						<div class="card-panel red lighten-2 white-text">
+							<span class="valign-wrapper "><i>可兑换积分：</i></span>
+							<span style="font-size: 60px; font-family: Consolas"><strong id="effectiveExchangeScore">0</strong></span>
+						</div>
+					</div>
+				</div>
+				<!--今日概况结束-->
+				<!--基础积分开始-->
+				<div class="row">
+					<div class="card">
+						<div class="card-content">
+							<blockquote style="border-color: #2aabd2">成长积分记录(最近记录)</blockquote>
+							<table class="centered responsive-table">
+								<thead>
+									<tr>
+										<th>积分项目</th>
+										<th>分数</th>
+										<th>获取时间</th>
+									</tr>
+								</thead>
+								<tbody id="growCreditBody">
+								</tbody>
+							</table>
+							<br>
+							<blockquote style="border-color: blueviolet">可兑换积分记录(最近记录)</blockquote>
+							<table class="centered responsive-table">
+								<thead>
+									<tr>
+										<th>积分项目</th>
+										<th>分数</th>
+										<th>获取时间</th>
+										<th>失效时间</th>
+									</tr>
+								</thead>
+								<tbody id="exchangeCreditBody">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--图表结束-->
+		</div>
+
+		<!--头像修改开始-->
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>头像修改</h4>
+				<form>
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>选择文件</span>
+							<input type="file" multiple>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" id="headEdit">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a onclick="updateHead()" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
+		</div>
+		<!--头像修改结束-->
+
+		<div th:replace="common::footer"></div>
+	</body>
+	<script>
+
+        /**
+         * 加载总用户页面函数
+         */
+        $(function () {
+            g_showLoading("加载个人信息中...");
+            try {
+                loadUserInfo();
+                loadRecord();
+            }catch (e) {
+                console.log(e)
+            }finally {
+                layer.msg("更新个人信息成功", {icon: 1});
+	            layer.closeAll();
+            }
+        })
+
+        /**
+         * 加载积分记录
+         */
+		function loadRecord(){
+            $.ajax({
+                url: "/u/ctr",
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                    if (data.code == 0) {
+                        let growCreditRecords = data.data[0]
+	                    for(let i = 0; i < Math.min(growCreditRecords.length,7); i++){
+                            let growCreditRecord = growCreditRecords[i];
+                            let tr = document.createElement('tr');
+                            let td1 = document.createElement('td');
+                            let td2 = document.createElement('td');
+                            let td3 = document.createElement('td');
+                            td1.innerText = growCreditRecord.info;
+                            td2.innerText = "+" + growCreditRecord.points;
+                            td3.innerText = growCreditRecord.createTime.replace("T", " ");
+                            tr.appendChild(td1)
+                            tr.appendChild(td2)
+		                    tr.appendChild(td3)
+		                    $("#growCreditBody").append(tr);
+	                    }
+                        let exchangeCreditRecords = data.data[1]
+                        for(let i = 0; i < Math.min(exchangeCreditRecords.length,6); i++){
+                            let exchangeCreditRecord = exchangeCreditRecords[i];
+                            let tr = document.createElement('tr');
+                            let td1 = document.createElement('td');
+                            let td2 = document.createElement('td');
+                            let td3 = document.createElement('td');
+                            let td4 = document.createElement('td');
+                            td1.innerText = exchangeCreditRecord.info;
+                            td2.innerText = "+" + exchangeCreditRecord.points;
+                            td3.innerText = exchangeCreditRecord.createTime.replace("T", " ");
+                            td4.innerText = exchangeCreditRecord.expiredTime.replace("T", " ");
+                            tr.appendChild(td1)
+                            tr.appendChild(td2)
+                            tr.appendChild(td3)
+                            tr.appendChild(td4)
+                            $("#exchangeCreditBody").append(tr);
+                        }
+                    } else {
+                        layer.msg("获取积分记录失败")
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+		}
+
+        /**
+         * 回填用户信息
+         */
+        function loadUserInfo(){
+            $.ajax({
+                url: "/u/info",
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                    if (data.code == 0) {
+                        let user = data.data
+                        $("#nicknameEdit").val(user.details.nickname);
+                        var count=$("#genderEdit  option").length;
+                        for(var i=0;i<count;i++) {
+                            if($("#genderEdit").get(0).options[i].value == user.details.gender) {
+                                $("#genderEdit").get(0).options[i].selected = true;
+                                break;
+                            }
+                        }
+                        $('select').formSelect();
+                        if(user.details.head == null){
+                            $("#head").attr("src", "https://kauizhaotan.oss-accelerate.aliyuncs.com/img/300")
+                        }else{
+                            $("#head").attr("src", user.details.head)
+                        }
+                        $("#infoEdit").val(user.details.info);
+                        $("#emailEdit").val(user.details.email);
+                        $("#growScore").text(user.growScore);
+                        $("#effectiveExchangeScore").text(user.effectiveExchangeScore)
+                        $("#totalPoints").text(user.growScore + user.effectiveExchangeScore)
+                        $('#complicationEdit').val(user.details.complication);
+                        M.textareaAutoResize($('#complicationEdit'));
+                        M.updateTextFields();
+                        layer.msg("加载个人信息成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+        /**
+         * 更新用户信息
+         */
+        function updateInfo(){
+            let formUserInfoData = {
+                nickname: $("#nicknameEdit").val(),
+                gender:$("#genderEdit").val(),
+                head: $("#head").src,
+                email:$("#emailEdit").val(),
+                info:$("#infoEdit").val()
+            }
+            let jsonUserInfo = JSON.stringify(formUserInfoData);
+            $.ajax({
+                url: "/u/update",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: jsonUserInfo,
+                success: function (data) {
+                    if (data.code == 0) {
+                        // loadUserInfo();
+                        layer.msg("更新用户信息成功", {icon:1})
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+        /**
+         * 更新用户并发症
+         */
+        function updateComplication(){
+            let formUserInfoData = {
+                complication : $("#complicationEdit").val()
+            }
+            let jsonUserInfo = JSON.stringify(formUserInfoData);
+            $.ajax({
+                url: "/u/updateComplication",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: jsonUserInfo,
+                success: function (data) {
+                    // console.log(data)
+                    if (data.code == 0) {
+                        layer.msg("更新个人并发症成功", {icon: 1});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+        /**
+         * 更新用户头像
+         */
+        function updateHead() {
+            let headFile = $("#headEdit").files[0];
+            console.log(headFile)
+            let reader = new FileReader();
+            reader.readAsDataURL(headFile);
+            reader.addEventListener('load', function() {
+                // 读取完成
+                let res = reader.result
+	            console.log(res)
+                // res是base64格式的图片
+            })
+
+        }
+	</script>
+</html>
