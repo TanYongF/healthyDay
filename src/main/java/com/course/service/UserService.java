@@ -96,7 +96,7 @@ public class UserService {
 
     public boolean updateInfo(User toBeUpdate) {
         userDao.updateInfo(toBeUpdate);
-        //删除缓存
+        //旁路缓存，删除缓存
         redisService.remove(UserKey.getById, Long.toString(toBeUpdate.getId()));
         return true;
     }

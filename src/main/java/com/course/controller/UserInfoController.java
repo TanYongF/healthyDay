@@ -11,6 +11,7 @@ import com.course.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,6 @@ public class UserInfoController {
         return Result.success(CodeMsg.SUCCESS);
     }
 
-
     /**
      * 获取用户可兑换积分记录
      * @param user 用户鉴权类
@@ -70,4 +70,19 @@ public class UserInfoController {
         record.put(1, ecRecords);
         return Result.success(record);
     }
+
+    /**
+     * 更新用户头像
+     *
+     * @param user 鉴权实体
+     * @param file 头像文件
+     * @return 用户信息实体
+     */
+    @PostMapping("/avatar")
+    public Result<UserDTO> updateAvatar(User user, MultipartFile file) {
+        userInfoService.updateAvatar(user, file);
+        UserDTO userDetail = userInfoService.getUserDetails(user.getId());
+        return Result.success(userDetail);
+    }
+
 }

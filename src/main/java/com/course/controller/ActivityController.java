@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @describe: 活动 Controller
+ * @describe: 拓展活动接口
  * @author: tyf
  * @createTime: 2022/5/20 15:14
  **/
