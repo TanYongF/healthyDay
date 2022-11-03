@@ -20,7 +20,7 @@ public class HealthyController {
     @GetMapping("")
     public void welcome(HttpServletResponse response){
         try {
-            response.sendRedirect("/login/do_login");
+            response.sendRedirect("/welcome.htm");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -57,6 +57,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 errorCode = CodeMsg.SESSION_ERROR;
             }
         }
+        //TODO: 这里应该是后端抛出错误状态码 然后前端可以跳转到500 400界面
         //如果未验证，那么就会返回未登录。
         if (!hasAuth) {
             logger.error("用户请求被拦截");

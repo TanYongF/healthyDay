@@ -1,22 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<div th:replace="common::header"></div>
-		<title>NOT FOUND</title>
+		<title>活动界面</title>
 	</head>
 	<body>
-		<div th:replace="common::root_navbar(2)"></div>
-
+		<!--navbar-->
+		<div th:replace="common::root_navbar(1)"></div>
 		<div class="container">
-			<div class="row">
-				<div class="col 12 panel">
-					<div class="center">
-						<h1>404</h1>
-					</div>
-
+			<div class="section">
+				<div class="col s12">
+					<blockquote class="title" style="border-color: red" >
+						全部活动
+					</blockquote>
+				</div>
+				<div class="row" id="activities">
 				</div>
 			</div>
 		</div>
-
 		<div th:replace="common::footer"></div>
 	</body>
+	<script>
+        $(function () {
+            g_showLoading("加载活动的信息中...");
+        })
+	</script>
 </html>

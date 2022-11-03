@@ -1,5 +1,10 @@
 package com.course.util;
 
+import cn.hutool.json.JSONArray;
+import com.course.pojo.Activity;
+
+import java.util.List;
+
 /**
  * @Describe: Json转换工具类
  * @Author: tyf
@@ -45,7 +50,10 @@ public class JSONUtil {
             return (T) Long.valueOf(str);
         } else if (clazz == byte.class || clazz == Byte.class) {
             return (T) Byte.valueOf(str);
-        } else {
+        } else if (clazz == List.class){
+            JSONArray objects = cn.hutool.json.JSONUtil.parseArray(str);
+            return (T) cn.hutool.json.JSONUtil.toList(objects, Activity.class);
+        }else{
             return cn.hutool.json.JSONUtil.toBean(str, clazz);
         }
     }

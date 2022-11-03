@@ -19,9 +19,9 @@
 				<div class="col s12 l12">
 					<div class="card horizontal large" style="   height: 600px; background-color: rgba(255,255,255,0.5)" >
 						<div class="card-image">
-							<img width="600" height="500" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/id/18/600/500" class="responsive-img wp-post-image" loading="lazy" sizes="(max-width: 305px) 100vw, 305px">
-							<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0)" >
-                                <span class="font-sans" style="font-size: 64px;line-height: 220px;">健康积分系统
+							<img width="600" height="500" src="https://pic1.xuehuaimg.com/proxy/https://picsum.photos/id/18/600/500?&blur=3" class="responsive-img wp-post-image" loading="lazy" sizes="(max-width: 305px) 100vw, 305px">
+							<span class="card-title" id="channelTitleSpan" style=" background-color: rgba(0,0,0,0); padding-bottom: 35% ">
+                                <span class="font-sans" style="font-size: 115%">健康积分系统
                                     <br>Points System
                                 </span>
                             </span>
@@ -46,7 +46,7 @@
 											<div class="row">
 												<div class="input-field col s12">
 													<i class="material-icons prefix">vpn_key</i>
-													<input class="form-control validate" id="password" type="password"  name="password" minlength="6" maxlength="20" value=""  data-length="20">
+													<input class="form-control validate" id="password" type="password"  name="password" minlength="6" maxlength="20" data-length="20" required="true">
 													<label for="password">密码</label>
 												</div>
 											</div>
@@ -76,7 +76,7 @@
 	</body>
 	<script>
         $(document).ready(function() {
-            $('input#mobile, textarea#password').characterCounter();
+            $('input#mobile, input#password').characterCounter();
         });
         function login() {
             $("#login-form").validate({

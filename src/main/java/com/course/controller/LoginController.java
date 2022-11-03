@@ -59,6 +59,7 @@ public class LoginController {
     public String login(HttpServletResponse response, User user) {
         if (user != null) {
             try {
+
                 response.sendRedirect("/index");
             } catch (IOException e) {
                 throw new RuntimeException(e);

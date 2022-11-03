@@ -1,7 +1,7 @@
 package com.course.redis;
 
 /**
- * @Describe: 类描述
+ * @Describe: Redis中User对象的键名称
  * @Author: tyf
  * @CreateTime: 2022/4/17
  **/

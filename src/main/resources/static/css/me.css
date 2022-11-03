@@ -1,23 +1,21 @@
 body {
-    background: url("https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/assessment/background.png") no-repeat center;
-    /*background-color: rgba(244,244,244);*/
     background-size: cover;
-    background-attachment: fixed;
+    background: url("https://kauizhaotan.oss-cn-shanghai.aliyuncs.com/assessment/background.png") no-repeat fixed center;
     -moz-transform: scale(1);
     -moz-transform-origin: 0 0;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-
 }
+
 ::-webkit-scrollbar {
     display: none; /* Chrome Safari */
 }
 .font-sans{
-    font-family: Lato,Noto Sans SC,-apple-system,sans-serif;
+    font-family: Lato,Cambria, Noto Sans SC,-apple-system,sans-serif;
 }
 .bg{
-    background: url("/img/index-2.jpg") no-repeat center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url("/img/index-2.jpg") no-repeat fixed center;
     background-size: cover;
     background-attachment: fixed;
     -moz-transform: scale(1);
@@ -37,12 +35,15 @@ blockquote{
 
 /*-------------Color相关--------------*/
 .theme-color{
-    background-color: #4caf50!important;
-    border-color:  #4caf50!important;
+    background-color: #31B53C!important;
+    border-color:  #31B53C!important;
     /*background-color: #4db6ac;*/
 }
 .theme-text-color{
     color:#4caf50 !important;
+}
+.my-footer{
+    background-color:mediumseagreen !important;
 }
 
 /*---------用户界面--------------*/
@@ -52,6 +53,7 @@ blockquote{
     left: 0 !important;
     text-align: center;
     font-size: 43px;
+    width: 100%;
 }
 
 /*----login---------*/
@@ -59,4 +61,8 @@ blockquote{
     width: 90%; !important;
     margin-bottom: 6%;
     margin-top: 6%;
+}
+
+.card-image{
+    text-align: center;
 }
